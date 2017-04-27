@@ -1,7 +1,7 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
 
-const Chart = ({ data }) => (
+const Chart = ({ data, farm }) => (
   <LineChart
     width={600} height={300} data={data}
     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
@@ -24,20 +24,17 @@ const Chart = ({ data }) => (
         color: '#fff',
       }}
     />
-    <Line
-      type="monotone"
-      dataKey="pv"
-      stroke="#f1c40f"
-      activeDot={{ r: 8 }}
-      strokeWidth={2}
-    />
-    <Line
-      type="monotone"
-      dataKey="uv"
-      stroke="#2ecc71"
-      activeDot={{ r: 8 }}
-      strokeWidth={2}
-    />
+    {
+      farm.map(({ name, color }) =>
+        <Line
+          type="monotone"
+          dataKey={name}
+          stroke={color}
+          activeDot={{ r: 8 }}
+          strokeWidth={2}
+        />,
+      )
+    }
   </LineChart>
 );
 
