@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import LineChart from './LineChart';
 import mapColorWithFarm from './utils/color';
+import MovingAvgCard from './MovingAvgCard';
 
 class App extends Component {
   constructor() {
@@ -18,8 +19,8 @@ class App extends Component {
         { name: 'JUL', uv: 3490, pv: 4300 },
       ],
       farm: [
-        { name: 'uv' },
-        { name: 'pv' },
+        { name: 'uv', mAvg: 4000, color: '#9b59b6' },
+        { name: 'pv', mAvg: 3500, color: '#9b59b6' },
       ],
     };
   }
@@ -32,7 +33,22 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <LineChart data={this.state.data} farm={mapColorWithFarm(this.state.farm)} />
+        <div className="content-container">
+          <div className="line-graph-container">
+            <LineChart data={this.state.data} farm={mapColorWithFarm(this.state.farm)} />
+          </div>
+          <div className="moving-avg-container">
+            {
+              this.state.farm.map(f =>
+                <MovingAvgCard
+                  name={f.name}
+                  color={f.color}
+                  mAvg={f.mAvg}
+                />,
+              )
+            }
+          </div>
+        </div>
       </div>
     );
   }
