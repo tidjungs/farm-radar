@@ -2,6 +2,7 @@
   text-align: center;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
+  background: #484856;
 }
 
 .App-logo {
@@ -32,5 +33,55 @@
 .line-graph-container {
   display: flex;
   justify-content: center;
-  background: #484856;
+}
+
+.moving-avg-container {
+  display: flex;
+  flex-direction: row;
+}
+.moving-avg-card {
+  height: 8em;
+  width: 8em;
+  margin-left: 2em;
+  margin-right: 2em;
+  background: #262833;
+  color: #fff;
+}
+
+.moving-avg-card-inside {
+  padding: 10%;
+  width: 80%;
+  height: 80%;
+}
+
+.moving-avg-card-inside > .top {
+  height: 40%;
+}
+
+
+.moving-avg-card-inside > .top > .name {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.moving-avg-card-inside > .top > .name > .icon {
+  height: 1em;
+  width: 1em;
+  border-radius: 1em;
+  margin-right: 1em;
+}
+
+
+.moving-avg-card-inside > .bottom {
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.moving-avg-card-inside > .bottom > .m-avg {
+  font-size: 36px;
+  opacity: 0.8;
 }

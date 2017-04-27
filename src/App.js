@@ -10,17 +10,17 @@ class App extends Component {
     super();
     this.state = {
       data: [
-        { name: 'JAN', uv: 4000, pv: 2400 },
-        { name: 'FEB', uv: 3000, pv: 1398 },
-        { name: 'MAR', uv: 2000, pv: 9800 },
-        { name: 'APR', uv: 2780, pv: 3908 },
-        { name: 'MAY', uv: 1890, pv: 4800 },
-        { name: 'JUN', uv: 2390, pv: 3800 },
-        { name: 'JUL', uv: 3490, pv: 4300 },
+        { id: 1, name: 'JAN', uv: 4000, pv: 2400 },
+        { id: 2, name: 'FEB', uv: 3000, pv: 1398 },
+        { id: 3, name: 'MAR', uv: 2000, pv: 9800 },
+        { id: 4, name: 'APR', uv: 2780, pv: 3908 },
+        { id: 5, name: 'MAY', uv: 1890, pv: 4800 },
+        { id: 6, name: 'JUN', uv: 2390, pv: 3800 },
+        { id: 7, name: 'JUL', uv: 3490, pv: 4300 },
       ],
       farm: [
-        { name: 'uv', mAvg: 4000, color: '#9b59b6' },
-        { name: 'pv', mAvg: 3500, color: '#9b59b6' },
+        { id: 1, name: 'uv', mAvg: 4000, color: '#9b59b6' },
+        { id: 2, name: 'pv', mAvg: 3500, color: '#e74c3c' },
       ],
     };
   }
@@ -44,6 +44,7 @@ class App extends Component {
                   name={f.name}
                   color={f.color}
                   mAvg={f.mAvg}
+                  key={f.id}
                 />,
               )
             }
