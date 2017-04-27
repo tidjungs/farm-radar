@@ -55,6 +55,7 @@ class App extends Component {
                   mAvg={f.mAvg}
                   key={f.id}
                   id={f.id}
+                  active={f.active ? 1 : 0.4}
                   activeFarm={index => this.activeFarm(index)}
                 />,
               )

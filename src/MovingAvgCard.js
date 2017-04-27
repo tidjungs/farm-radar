@@ -1,7 +1,11 @@
 import React from 'react';
 
-const MovingAvgCard = ({ name, mAvg, color, activeFarm, id }) => (
-  <div className="moving-avg-card" onClick={() => activeFarm(id)}>
+const MovingAvgCard = ({ name, mAvg, color, activeFarm, id, active }) => (
+  <div
+    className="moving-avg-card"
+    onClick={() => activeFarm(id)}
+    style={{ opacity: active }}
+  >
     <div className="moving-avg-card-inside">
       <div className="top">
         <div className="name">

@@ -46,6 +46,11 @@
   margin-right: 2em;
   background: #262833;
   color: #fff;
+  transition: 0.5s;
+}
+
+.moving-avg-card:hover {
+  transform: scale(1.1);
 }
 
 .moving-avg-card-inside {
