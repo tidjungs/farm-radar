@@ -5,10 +5,10 @@ import mapColorWithFarm from './utils/color';
 import MovingAvgCard from './MovingAvgCard';
 
 const farm = [
-  { id: 1, name: 'farm1', mAvg: '$4000', color: '#9b59b6', active: true },
-  { id: 2, name: 'farm2', mAvg: '$3500', color: '#e74c3c', active: true },
-  { id: 3, name: 'farm3', mAvg: '$3500', color: '#2ecc71', active: true },
-  { id: 4, name: 'farm4', mAvg: '$6000', color: '#f1c40f', active: true },
+  { id: 1, name: 'farm1', mAvg: '$40', active: true },
+  { id: 2, name: 'farm2', mAvg: '$35', active: true },
+  { id: 3, name: 'farm3', mAvg: '$35', active: true },
+  { id: 4, name: 'farm4', mAvg: '$60', active: true },
 ];
 
 class App extends Component {
@@ -42,34 +42,29 @@ class App extends Component {
         <div className="App-header">
           FARM RADAR
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <div className="content-container">
-          <div className="line-graph-container">
-            <LineChart data={this.state.data} farm={mapColorWithFarm(this.state.farm)} />
-          </div>
-          <h1>MOVING AVERAGE</h1>
-          <br />
-          <div className="moving-avg-container">
-            {
-              this.state.farm.map(f =>
-                <MovingAvgCard
-                  name={f.name}
-                  color={f.color}
-                  mAvg={f.mAvg}
-                  key={f.id}
-                  id={f.id}
-                  active={f.active ? 1 : 0.4}
-                  activeFarm={index => this.activeFarm(index)}
-                />,
-              )
-            }
+        <div className="App-container">
+          <div className="sidebar-container" />
+          <div className="content-container">
+            <div className="line-graph-container">
+              <LineChart data={this.state.data} farm={mapColorWithFarm(this.state.farm)} />
+            </div>
+            <div className="moving-avg-container">
+              {
+                this.state.farm.map(f =>
+                  <MovingAvgCard
+                    name={f.name}
+                    color={f.color}
+                    mAvg={f.mAvg}
+                    key={f.id}
+                    id={f.id}
+                    active={f.active ? 1 : 0.4}
+                    activeFarm={index => this.activeFarm(index)}
+                  />,
+                )
+              }
+            </div>
           </div>
         </div>
-        <br />
-        <br />
-        <br />
       </div>
     );
   }

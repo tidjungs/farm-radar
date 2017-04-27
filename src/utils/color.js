@@ -1,4 +1,4 @@
-const colors = ['#9b59b6', '#e74c3c', '#f1c40f', '#2ecc71'];
+const colors = ['#28BAD1', '#CB4F23', '#22AF70', '#DFBA50', '#9b59b6'];
 
 const mapColorWithFarm = data => (
   data.map((d, i) =>
