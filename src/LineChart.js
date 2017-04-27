@@ -25,7 +25,9 @@ const Chart = ({ data, farm }) => (
       }}
     />
     {
-      farm.map(({ id, name, color }) =>
+
+      farm.map(({ id, name, color, active }) =>
+        active &&
         <Line
           key={id}
           type="monotone"

@@ -19,11 +19,20 @@ class App extends Component {
         { id: 7, name: 'JUL', uv: 3490, pv: 4300 },
       ],
       farm: [
-        { id: 1, name: 'uv', mAvg: 4000, color: '#9b59b6' },
-        { id: 2, name: 'pv', mAvg: 3500, color: '#e74c3c' },
+        { id: 1, name: 'uv', mAvg: 4000, color: '#9b59b6', active: true },
+        { id: 2, name: 'pv', mAvg: 3500, color: '#e74c3c', active: true },
       ],
     };
   }
+
+  activeFarm(index) {
+    this.setState({
+      farm: this.state.farm.map(f =>
+        (f.id === index ? { ...f, active: !f.active } : f),
+      ),
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -45,6 +54,8 @@ class App extends Component {
                   color={f.color}
                   mAvg={f.mAvg}
                   key={f.id}
+                  id={f.id}
+                  activeFarm={index => this.activeFarm(index)}
                 />,
               )
             }
