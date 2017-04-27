@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
+// component
 import LineChart from './LineChart';
-import mapColorWithFarm from './utils/color';
 import MovingAvgCard from './MovingAvgCard';
+import TimeSelect from './TimeSelect';
+
+// action
+import mapColorWithFarm from './utils/color';
+
 
 const farm = [
   { id: 1, name: 'farm1', mAvg: '$40', active: true },
@@ -25,6 +30,13 @@ class App extends Component {
         { id: 7, name: 'JUL', farm1: 3490, farm2: 4300, farm3: 1300, farm4: 3200 },
       ],
       farm: mapColorWithFarm(farm),
+      duration: [
+        { id: 1, name: 'week', active: true },
+        { id: 2, name: 'month', active: false },
+        { id: 3, name: 'year', active: false },
+        { id: 4, name: '2 years', active: false },
+        { id: 5, name: '5 years', active: false },
+      ],
     };
   }
 
@@ -45,6 +57,7 @@ class App extends Component {
         <div className="App-container">
           <div className="sidebar-container" />
           <div className="content-container">
+            <TimeSelect duration={this.state.duration} />
             <div className="line-graph-container">
               <LineChart data={this.state.data} farm={mapColorWithFarm(this.state.farm)} />
             </div>
