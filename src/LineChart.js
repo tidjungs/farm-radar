@@ -1,17 +1,7 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
 
-const data = [
-  { name: 'JAN', uv: 4000, pv: 2400 },
-  { name: 'FEB', uv: 3000, pv: 1398 },
-  { name: 'MAR', uv: 2000, pv: 9800 },
-  { name: 'APR', uv: 2780, pv: 3908 },
-  { name: 'MAY', uv: 1890, pv: 4800 },
-  { name: 'JUN', uv: 2390, pv: 3800 },
-  { name: 'JUL', uv: 3490, pv: 4300 },
-];
-
-const Chart = () => (
+const Chart = ({ data }) => (
   <LineChart
     width={600} height={300} data={data}
     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
@@ -50,5 +40,6 @@ const Chart = () => (
     />
   </LineChart>
 );
+
 
 export default Chart;
