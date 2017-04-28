@@ -2,7 +2,7 @@ import React from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const Chart = ({ data, farm }) => (
-  <ResponsiveContainer width="80%" height={450}>
+  <ResponsiveContainer width="90%" height={400}>
     <LineChart
       data={data}
       margin={{ top: 30, right: 0, left: 0, bottom: 30 }}

@@ -31,11 +31,11 @@ class App extends Component {
       ],
       farm: mapColorWithFarm(farm),
       duration: [
-        { id: 1, name: 'week', active: true },
-        { id: 2, name: 'month', active: false },
-        { id: 3, name: 'year', active: false },
-        { id: 4, name: '2 years', active: false },
-        { id: 5, name: '5 years', active: false },
+        { id: 1, name: '1W', active: true },
+        { id: 2, name: '1M', active: false },
+        { id: 3, name: '1Y', active: false },
+        { id: 4, name: '2Y', active: false },
+        { id: 5, name: '5Y', active: false },
       ],
     };
   }
@@ -44,6 +44,14 @@ class App extends Component {
     this.setState({
       farm: this.state.farm.map(f =>
         (f.id === index ? { ...f, active: !f.active } : f),
+      ),
+    });
+  }
+
+  changeDuration(index) {
+    this.setState({
+      duration: this.state.duration.map(d =>
+        (d.id === index ? { ...d, active: true } : { ...d, active: false }),
       ),
     });
   }
@@ -57,7 +65,10 @@ class App extends Component {
         <div className="App-container">
           <div className="sidebar-container" />
           <div className="content-container">
-            <TimeSelect duration={this.state.duration} />
+            <TimeSelect
+              duration={this.state.duration}
+              changeDuration={index => this.changeDuration(index)}
+            />
             <div className="line-graph-container">
               <LineChart data={this.state.data} farm={mapColorWithFarm(this.state.farm)} />
             </div>
