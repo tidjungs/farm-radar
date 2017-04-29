@@ -1,0 +1,32 @@
+.correlation-data-container {
+  display: flex;
+  justify-content: center;
+  background: #373b47;
+}
+
+.correlation-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /*width: 30%;*/
+  height: 8em;
+  margin: 2em;
+  border: solid 2px;
+  border-color: #e0e0e0;
+}
+
+.correlation-data:nth-child(1) > p {
+  /*color: #22AF70;*/
+  margin-left: 0.4em;
+  margin-right: 0.4em;
+  color: #e0e0e0;
+  font-size: 65px;
+}
+
+.correlation-data:nth-child(2) > p {
+  color: #e0e0e0;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  /*color: #22AF70;*/
+  font-size: 32px;
+}

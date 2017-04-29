@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TimeSelect from '../component/TimeSelect';
 import CorrelationChart from '../component/CorrelationChart';
+import './PriceCorelation.css';
 
 class PriceCorrelation extends Component {
   constructor() {
@@ -33,6 +34,14 @@ class PriceCorrelation extends Component {
         />
         <div className="correlation-chart-container">
           <CorrelationChart />
+        </div>
+        <div className="correlation-data-container">
+          <div className="correlation-data">
+            <p>0.9</p>
+          </div>
+          <div className="correlation-data">
+            <p>positive corelation</p>
+          </div>
         </div>
       </div>
     );

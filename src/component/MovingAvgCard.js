@@ -22,3 +22,4 @@ const MovingAvgCard = ({ name, mAvg, color, activeFarm, id, active }) => (
 
 
 export default MovingAvgCard;
+
