@@ -1,0 +1,80 @@
+import React, { Component } from 'react';
+import './PriceAverage.css';
+// component
+import LineChart from './LineChart';
+import MovingAvgCard from './MovingAvgCard';
+import TimeSelect from './TimeSelect';
+
+// action
+import mapColorWithFarm from './utils/color';
+
+class PriceAverage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      farm: mapColorWithFarm(props.farm),
+      duration: [
+        { id: 1, name: '1W', active: true },
+        { id: 2, name: '1M', active: false },
+        { id: 3, name: '1Y', active: false },
+        { id: 4, name: '2Y', active: false },
+        { id: 5, name: '5Y', active: false },
+      ],
+      data: props.data,
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      data: nextProps.data,
+      farm: nextProps.farm,
+    });
+  }
+
+  activeFarm(index) {
+    this.setState({
+      farm: this.state.farm.map(f =>
+        (f.id === index ? { ...f, active: !f.active } : f),
+      ),
+    });
+  }
+
+  changeDuration(index) {
+    this.setState({
+      duration: this.state.duration.map(d =>
+        (d.id === index ? { ...d, active: true } : { ...d, active: false }),
+      ),
+    });
+  }
+
+  render() {
+    return (
+      <div className="content-container">
+        <TimeSelect
+          duration={this.state.duration}
+          changeDuration={index => this.changeDuration(index)}
+        />
+        <div className="line-graph-container">
+          <LineChart data={this.state.data} farm={mapColorWithFarm(this.state.farm)} />
+        </div>
+        <div className="moving-avg-container">
+          {
+            this.state.farm.map(f =>
+              <MovingAvgCard
+                name={f.name}
+                color={f.color}
+                mAvg={f.mAvg}
+                key={f.id}
+                id={f.id}
+                active={f.active ? 1 : 0.4}
+                activeFarm={index => this.activeFarm(index)}
+              />,
+            )
+          }
+        </div>
+      </div>
+    );
+  }
+}
+
+export default PriceAverage;

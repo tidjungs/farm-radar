@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
-import './App.css';
-// component
-import LineChart from './LineChart';
-import MovingAvgCard from './MovingAvgCard';
-import TimeSelect from './TimeSelect';
 
-// action
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+} from 'react-router-dom';
+
+import PriceAverage from './PriceAverage';
+import PriceCorrelation from './PriceCorrelation';
+import './App.css';
 import mapColorWithFarm from './utils/color';
 
+const renderMergedProps = (component, ...rest) => {
+  const finalProps = Object.assign({}, ...rest);
+  return (
+    React.createElement(component, finalProps)
+  );
+};
+
+const PropsRoute = ({ component, ...rest }) =>
+(
+  <Route
+    {...rest} render={
+    routeProps => renderMergedProps(component, routeProps, rest)}
+  />
+);
 
 const farm = [
   { id: 1, name: 'farm1', mAvg: '$40', active: true },
@@ -20,6 +37,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      name: 'FARM RADAR',
       data: [
         { id: 1, name: 'JAN', farm1: 4000, farm2: 2400, farm3: 1600, farm4: 3200 },
         { id: 2, name: 'FEB', farm1: 3000, farm2: 1398, farm3: 1800, farm4: 2500 },
@@ -29,7 +47,6 @@ class App extends Component {
         { id: 6, name: 'JUN', farm1: 2390, farm2: 3800, farm3: 2200, farm4: 3000 },
         { id: 7, name: 'JUL', farm1: 3490, farm2: 4300, farm3: 1300, farm4: 3200 },
       ],
-      farm: mapColorWithFarm(farm),
       duration: [
         { id: 1, name: '1W', active: true },
         { id: 2, name: '1M', active: false },
@@ -37,59 +54,34 @@ class App extends Component {
         { id: 4, name: '2Y', active: false },
         { id: 5, name: '5Y', active: false },
       ],
+      farm: mapColorWithFarm(farm),
     };
-  }
-
-  activeFarm(index) {
-    this.setState({
-      farm: this.state.farm.map(f =>
-        (f.id === index ? { ...f, active: !f.active } : f),
-      ),
-    });
-  }
-
-  changeDuration(index) {
-    this.setState({
-      duration: this.state.duration.map(d =>
-        (d.id === index ? { ...d, active: true } : { ...d, active: false }),
-      ),
-    });
   }
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          FARM RADAR
-        </div>
-        <div className="App-container">
-          <div className="sidebar-container" />
-          <div className="content-container">
-            <TimeSelect
-              duration={this.state.duration}
-              changeDuration={index => this.changeDuration(index)}
+      <Router>
+        <div className="App">
+          <div className="App-header">
+            <p>{ this.state.name }</p>
+            <li><Link to="/">Price</Link></li>
+            <li><Link to="/corr">Corr</Link></li>
+          </div>
+          <div className="App-container">
+            <div className="sidebar-container" />
+            <PropsRoute
+              exact path="/"
+              component={PriceAverage}
+              data={this.state.data}
+              farm={farm}
             />
-            <div className="line-graph-container">
-              <LineChart data={this.state.data} farm={mapColorWithFarm(this.state.farm)} />
-            </div>
-            <div className="moving-avg-container">
-              {
-                this.state.farm.map(f =>
-                  <MovingAvgCard
-                    name={f.name}
-                    color={f.color}
-                    mAvg={f.mAvg}
-                    key={f.id}
-                    id={f.id}
-                    active={f.active ? 1 : 0.4}
-                    activeFarm={index => this.activeFarm(index)}
-                  />,
-                )
-              }
-            </div>
+            <PropsRoute
+              exact path="/corr"
+              component={PriceCorrelation}
+            />
           </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
