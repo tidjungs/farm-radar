@@ -27,7 +27,7 @@ class PriceAverage extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       data: nextProps.data,
-      farm: nextProps.farm,
+      farm: mapColorWithFarm(nextProps.farm),
     });
   }
 

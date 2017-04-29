@@ -64,8 +64,8 @@ class App extends Component {
         <div className="App">
           <div className="App-header">
             <p>{ this.state.name }</p>
-            <li><Link to="/">Price</Link></li>
-            <li><Link to="/corr">Corr</Link></li>
+            <Link to="/"><p>Price</p></Link>
+            <Link to="/corr"><p>Corr</p></Link>
           </div>
           <div className="App-container">
             <div className="sidebar-container" />
