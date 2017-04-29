@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './PriceAverage.css';
 // component
-import LineChart from './LineChart';
-import MovingAvgCard from './MovingAvgCard';
-import TimeSelect from './TimeSelect';
+import LineChart from '../component/LineChart';
+import MovingAvgCard from '../component/MovingAvgCard';
+import TimeSelect from '../component/TimeSelect';
 
 // action
-import mapColorWithFarm from './utils/color';
+import mapColorWithFarm from '../utils/color';
 
 class PriceAverage extends Component {
   constructor(props) {

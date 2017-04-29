@@ -6,8 +6,8 @@ import {
   Link,
 } from 'react-router-dom';
 
-import PriceAverage from './PriceAverage';
-import PriceCorrelation from './PriceCorrelation';
+import PriceAverage from './view/PriceAverage';
+import PriceCorrelation from './view/PriceCorrelation';
 import './App.css';
 import mapColorWithFarm from './utils/color';
 
