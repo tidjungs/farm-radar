@@ -29,3 +29,8 @@
   flex-direction: column;
   background: #484856;
 }
+
+.correlation-chart-container {
+  display: flex;
+  justify-content: center;
+}
