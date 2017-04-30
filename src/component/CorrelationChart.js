@@ -8,7 +8,7 @@ const data = [
 ];
 
 const CorrelationChart = () => (
-  <ResponsiveContainer width="90%" height={400}>
+  <ResponsiveContainer width="50%" height={400}>
     <ScatterChart
       margin={{ top: 30, right: 0, left: 0, bottom: 30 }}
     >
@@ -30,7 +30,7 @@ const CorrelationChart = () => (
       <Scatter
         name="A school"
         data={data}
-        fill="#8884d8"
+        fill="#DFBA50"
       />
       <Tooltip
         wrapperStyle={{

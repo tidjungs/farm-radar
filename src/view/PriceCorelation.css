@@ -9,24 +9,25 @@
   flex-direction: column;
   justify-content: center;
   /*width: 30%;*/
-  height: 8em;
-  margin: 2em;
+  height: 5em;
+  margin-top: 2em;
+  margin-left: 2em;
+  margin-bottom: 2em;
   border: solid 2px;
-  border-color: #e0e0e0;
+  /*border-color: #e0e0e0;*/
+  border-color: #22AF70;
 }
 
 .correlation-data:nth-child(1) > p {
-  /*color: #22AF70;*/
-  margin-left: 0.4em;
-  margin-right: 0.4em;
   color: #e0e0e0;
-  font-size: 65px;
+  margin-left: 0.3em;
+  margin-right: 0.3em;
+  font-size: 50px;
 }
 
 .correlation-data:nth-child(2) > p {
   color: #e0e0e0;
-  margin-left: 1.5em;
-  margin-right: 1.5em;
-  /*color: #22AF70;*/
+  margin-left: 1em;
+  margin-right: 1em;
   font-size: 32px;
 }
