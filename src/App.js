@@ -8,6 +8,7 @@ import {
 
 import PriceAverage from './view/PriceAverage';
 import PriceCorrelation from './view/PriceCorrelation';
+import PlantInfo from './view/PlantInfo';
 import './App.css';
 import mapColorWithFarm from './utils/color';
 
@@ -54,6 +55,11 @@ class App extends Component {
         { id: 4, name: '2Y', active: false },
         { id: 5, name: '5Y', active: false },
       ],
+      corr: [
+        { x: 100, y: 200, z: 200 }, { x: 120, y: 100, z: 260 },
+        { x: 170, y: 300, z: 400 }, { x: 140, y: 250, z: 280 },
+        { x: 150, y: 400, z: 500 }, { x: 110, y: 280, z: 200 },
+      ],
       farm: mapColorWithFarm(farm),
     };
   }
@@ -66,6 +72,7 @@ class App extends Component {
             <p>{ this.state.name }</p>
             <Link to="/"><p>Price</p></Link>
             <Link to="/corr"><p>Corr</p></Link>
+            <Link to="/info"><p>Info</p></Link>
           </div>
           <div className="App-container">
             <div className="sidebar-container" />
@@ -78,6 +85,11 @@ class App extends Component {
             <PropsRoute
               exact path="/corr"
               component={PriceCorrelation}
+              data={this.state.corr}
+            />
+            <PropsRoute
+              exact path="/info"
+              component={PlantInfo}
             />
           </div>
         </div>

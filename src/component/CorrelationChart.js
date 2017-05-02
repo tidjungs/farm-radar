@@ -1,13 +1,7 @@
 import React from 'react';
 import { ScatterChart, Scatter, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
-const data = [
-  { x: 100, y: 200, z: 200 }, { x: 120, y: 100, z: 260 },
-  { x: 170, y: 300, z: 400 }, { x: 140, y: 250, z: 280 },
-  { x: 150, y: 400, z: 500 }, { x: 110, y: 280, z: 200 },
-];
-
-const CorrelationChart = () => (
+const CorrelationChart = ({ data }) => (
   <ResponsiveContainer width="50%" height={400}>
     <ScatterChart
       margin={{ top: 30, right: 0, left: 0, bottom: 30 }}

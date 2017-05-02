@@ -33,7 +33,7 @@ class PriceCorrelation extends Component {
           changeDuration={index => this.changeDuration(index)}
         />
         <div className="correlation-chart-container">
-          <CorrelationChart />
+          <CorrelationChart data={this.props.data} />
         </div>
         <div className="correlation-data-container">
           <div className="correlation-data">
