@@ -33,7 +33,7 @@ const CorrelationChart = ({ data }) => (
           borderRadius: '10px',
         }}
         itemStyle={{
-          color: '#fff',
+          color: '#DFBA50',
         }}
       />
     </ScatterChart>

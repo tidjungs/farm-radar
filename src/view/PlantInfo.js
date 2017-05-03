@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AreaChart from '../component/AreaChart';
 
 class FarmInfo extends Component {
   constructor() {
@@ -12,6 +13,7 @@ class FarmInfo extends Component {
     return (
       <div>
         { this.state.name }
+        <AreaChart />
       </div>
     );
   }
