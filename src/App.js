@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import fetch from 'isomorphic-fetch';
+// import Halogen from 'halogen';
 
 import {
   BrowserRouter as Router,
@@ -11,6 +13,7 @@ import PriceCorrelation from './view/PriceCorrelation';
 import PlantInfo from './view/PlantInfo';
 import './App.css';
 import mapColorWithFarm from './utils/color';
+// import test from './utils/loading';
 
 const renderMergedProps = (component, ...rest) => {
   const finalProps = Object.assign({}, ...rest);
@@ -27,6 +30,18 @@ const PropsRoute = ({ component, ...rest }) =>
   />
 );
 
+// const color = 'red';
+
+// const styles = {
+//   position: 'absolute',
+//   width: '100%',
+//   height: '100%',
+//   paddingLeft: '55%',
+//   paddingTop: '15%',
+//   background: 'black',
+//   opacity: '0.6',
+// };
+
 const farm = [
   { id: 1, name: 'farm1', mAvg: '$40', active: true },
   { id: 2, name: 'farm2', mAvg: '$35', active: true },
@@ -39,6 +54,7 @@ class App extends Component {
     super();
     this.state = {
       name: 'FARM RADAR',
+      loading: false,
       data: [
         { id: 1, name: 'JAN', farm1: 4000, farm2: 2400, farm3: 1600, farm4: 3200 },
         { id: 2, name: 'FEB', farm1: 3000, farm2: 1398, farm3: 1800, farm4: 2500 },
@@ -63,18 +79,33 @@ class App extends Component {
       farm: mapColorWithFarm(farm),
     };
   }
-
+  async loadData() {
+    this.setState({
+      loading: true,
+    });
+    const response = await fetch('https://shrouded-tundra-34049.herokuapp.com/price/854569');
+    const res = await response.json();
+    console.log(res.data);
+    this.setState({
+      loading: false,
+    });
+  }
   render() {
     return (
       <Router>
         <div className="App">
           <div className="App-header">
+            <button onClick={() => this.loadData()}>GET DATA</button>
             <p>{ this.state.name }</p>
             <Link to="/"><p>Price</p></Link>
             <Link to="/corr"><p>Corr</p></Link>
             <Link to="/info"><p>Info</p></Link>
           </div>
           <div className="App-container">
+            {/*
+              this.state.loading &&
+              <div style={styles}><Halogen.DotLoader color={color} /></div>
+            */}
             <div className="sidebar-container" />
             <PropsRoute
               exact path="/"
