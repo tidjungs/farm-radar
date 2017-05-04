@@ -44,10 +44,10 @@ const PropsRoute = ({ component, ...rest }) =>
 // };
 
 const farm = [
-  { id: 1, name: 'farm1', mAvg: '$40', active: true },
-  { id: 2, name: 'farm2', mAvg: '$35', active: true },
-  { id: 3, name: 'farm3', mAvg: '$35', active: true },
-  { id: 4, name: 'farm4', mAvg: '$60', active: true },
+  { farm_id: 1, name: 'farm1', farm_avg: '$40', active: true },
+  { farm_id: 2, name: 'farm2', farm_avg: '$35', active: true },
+  { farm_id: 3, name: 'farm3', farm_avg: '$35', active: true },
+  { farm_id: 4, name: 'farm4', farm_avg: '$60', active: true },
 ];
 
 class App extends Component {
@@ -57,13 +57,13 @@ class App extends Component {
       name: 'FARM RADAR',
       loading: false,
       data: [
-        { id: 1, name: 'JAN', farm1: 4000, farm2: 2400, farm3: 1600, farm4: 3200 },
-        { id: 2, name: 'FEB', farm1: 3000, farm2: 1398, farm3: 1800, farm4: 2500 },
-        { id: 3, name: 'MAR', farm1: 2000, farm2: 9800, farm3: 2400, farm4: 1600 },
-        { id: 4, name: 'APR', farm1: 2780, farm2: 3908, farm3: 3600, farm4: 2500 },
-        { id: 5, name: 'MAY', farm1: 1890, farm2: 4800, farm3: 1700, farm4: 3300 },
-        { id: 6, name: 'JUN', farm1: 2390, farm2: 3800, farm3: 2200, farm4: 3000 },
-        { id: 7, name: 'JUL', farm1: 3490, farm2: 4300, farm3: 1300, farm4: 3200 },
+        { id: 1, name: 'JAN', type: 'week', farm1: 4000, farm2: 2400, farm3: 1600, farm4: 3200 },
+        { id: 2, name: 'FEB', type: 'week', farm1: 3000, farm2: 1398, farm3: 1800, farm4: 2500 },
+        { id: 3, name: 'MAR', type: 'week', farm1: 2000, farm2: 9800, farm3: 2400, farm4: 1600 },
+        { id: 4, name: 'APR', type: 'week', farm1: 2780, farm2: 3908, farm3: 3600, farm4: 2500 },
+        { id: 5, name: 'MAY', type: 'week', farm1: 1890, farm2: 4800, farm3: 1700, farm4: 3300 },
+        { id: 6, name: 'JUN', type: 'week', farm1: 2390, farm2: 3800, farm3: 2200, farm4: 3000 },
+        { id: 7, name: 'JUL', type: 'week', farm1: 3490, farm2: 4300, farm3: 1300, farm4: 3200 },
       ],
       duration: [
         { id: 1, name: '1W', active: true },
@@ -80,36 +80,45 @@ class App extends Component {
       farm: mapColorWithFarm(farm),
       searchText: '',
       productData: [
-        { id: 1, name: 'pork', active: true, suggest: true },
-        { id: 2, name: 'chicken', active: false, suggest: true },
-        { id: 3, name: 'duck', active: false, suggest: true },
-        { id: 4, name: 'mushroom', active: false, suggest: true },
+        { id: 854569, name: 'swine', active: true, suggest: true },
+        { id: 920215, name: 'broiler', active: false, suggest: true },
+        { id: 111185, name: 'eggs', active: false, suggest: true },
+        { id: 446789, name: 'eggs3', active: false, suggest: true },
+        { id: 446790, name: 'eggs4', active: false, suggest: true },
+        { id: 11331, name: 'casava25', active: false, suggest: true },
+        { id: 11357, name: 'casava30', active: false, suggest: true },
       ],
     };
   }
-  async loadData() {
+  async loadData(id) {
     this.setState({
       loading: true,
     });
-    const response = await fetch('https://shrouded-tundra-34049.herokuapp.com/price/854569');
+    const response = await fetch(`https://shrouded-tundra-34049.herokuapp.com/price/${id}`);
     const res = await response.json();
-    console.log(res.data);
     this.setState({
+      data: res.data,
+      farm: mapColorWithFarm(
+        res.farm.map(f =>
+          ({ ...f, active: true }),
+        ),
+      ),
       loading: false,
     });
   }
   selectProduct(id) {
     this.setState({
-      productData: this.state.productData.map(
-        data => (data.id === id ? { ...data, active: true } : { ...data, active: false }),
+      productData: this.state.productData.map(data =>
+        (data.id === id ? { ...data, active: true } : { ...data, active: false }),
       ),
     });
+    this.loadData(id);
   }
 
   updateText(e) {
     this.setState({
-      productData: this.state.productData.map(
-        data => (
+      productData: this.state.productData.map(data =>
+        (
           data.name.includes(e.target.value) ?
             { ...data, suggest: true } :
             { ...data, suggest: false }

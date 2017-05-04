@@ -31,10 +31,10 @@ class PriceAverage extends Component {
     });
   }
 
-  activeFarm(index) {
+  activeFarm(id) {
     this.setState({
       farm: this.state.farm.map(f =>
-        (f.id === index ? { ...f, active: !f.active } : f),
+        (f.farm_id === id ? { ...f, active: !f.active } : f),
       ),
     });
   }
@@ -55,7 +55,7 @@ class PriceAverage extends Component {
           changeDuration={index => this.changeDuration(index)}
         />
         <div className="line-graph-container">
-          <LineChart data={this.state.data} farm={mapColorWithFarm(this.state.farm)} />
+          <LineChart data={this.state.data} farm={this.state.farm} />
         </div>
         <div className="moving-avg-container">
           {
@@ -63,11 +63,11 @@ class PriceAverage extends Component {
               <MovingAvgCard
                 name={f.name}
                 color={f.color}
-                mAvg={f.mAvg}
-                key={f.id}
-                id={f.id}
+                mAvg={f.farm_avg}
+                key={f.farm_id}
+                id={f.farm_id}
                 active={f.active ? 1 : 0.4}
-                activeFarm={index => this.activeFarm(index)}
+                activeFarm={() => this.activeFarm(f.farm_id)}
               />,
             )
           }

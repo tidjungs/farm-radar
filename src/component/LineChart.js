@@ -1,3 +1,4 @@
+/* eslint-disable camelcase*/
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -27,10 +28,10 @@ const Chart = ({ data, farm }) => (
       />
       {
 
-        farm.map(({ id, name, color, active }) =>
+        farm.map(({ farm_id, name, color, active }) =>
           active &&
           <Line
-            key={id}
+            key={farm_id}
             type="monotone"
             dataKey={name}
             stroke={color}
