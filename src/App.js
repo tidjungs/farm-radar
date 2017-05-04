@@ -80,7 +80,7 @@ class App extends Component {
       farm: mapColorWithFarm(farm),
       searchText: '',
       productData: [
-        { id: 1, name: 'pork', active: false, suggest: true },
+        { id: 1, name: 'pork', active: true, suggest: true },
         { id: 2, name: 'chicken', active: false, suggest: true },
         { id: 3, name: 'duck', active: false, suggest: true },
         { id: 4, name: 'mushroom', active: false, suggest: true },
@@ -100,7 +100,7 @@ class App extends Component {
   }
   selectProduct(id) {
     this.setState({
-      searchData: this.state.searchData.map(
+      productData: this.state.productData.map(
         data => (data.id === id ? { ...data, active: true } : { ...data, active: false }),
       ),
     });
@@ -120,7 +120,6 @@ class App extends Component {
   }
 
   render() {
-    // console.log(this.state.productData);
     return (
       <Router>
         <div className="App">

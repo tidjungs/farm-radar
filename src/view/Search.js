@@ -14,6 +14,7 @@ const Search = ({ text, updateText, productData, selectProduct }) => (
         <SearchCard
           key={product.id}
           productName={product.name}
+          active={product.active}
           selectProduct={() => selectProduct(product.id)}
         />,
       )
