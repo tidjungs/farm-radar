@@ -11,6 +11,7 @@ import {
 import PriceAverage from './view/PriceAverage';
 import PriceCorrelation from './view/PriceCorrelation';
 import PlantInfo from './view/PlantInfo';
+import Search from './view/Search';
 import './App.css';
 import mapColorWithFarm from './utils/color';
 // import test from './utils/loading';
@@ -90,6 +91,13 @@ class App extends Component {
       loading: false,
     });
   }
+  selectProduct(id) {
+    this.setState({
+      searchData: this.state.searchData.map(
+        data => (data.id === id ? { ...data, active: true } : { ...data, active: false }),
+      ),
+    });
+  }
   render() {
     return (
       <Router>
@@ -106,7 +114,13 @@ class App extends Component {
               this.state.loading &&
               <div style={styles}><Halogen.DotLoader color={color} /></div>
             */}
-            <div className="sidebar-container" />
+            <div className="sidebar-container">
+              <Search
+                text={this.state.searchText}
+                productData={this.state.productData}
+                selectProduct={id => this.selectProduct(id)}
+              />
+            </div>
             <PropsRoute
               exact path="/"
               component={PriceAverage}
