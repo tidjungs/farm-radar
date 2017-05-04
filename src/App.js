@@ -78,6 +78,13 @@ class App extends Component {
         { x: 150, y: 400, z: 500 }, { x: 110, y: 280, z: 200 },
       ],
       farm: mapColorWithFarm(farm),
+      searchText: '',
+      productData: [
+        { id: 1, name: 'pork', active: false, suggest: true },
+        { id: 2, name: 'chicken', active: false, suggest: true },
+        { id: 3, name: 'duck', active: false, suggest: true },
+        { id: 4, name: 'mushroom', active: false, suggest: true },
+      ],
     };
   }
   async loadData() {
@@ -98,7 +105,22 @@ class App extends Component {
       ),
     });
   }
+
+  updateText(e) {
+    this.setState({
+      productData: this.state.productData.map(
+        data => (
+          data.name.includes(e.target.value) ?
+            { ...data, suggest: true } :
+            { ...data, suggest: false }
+        ),
+      ),
+      searchText: e.target.value,
+    });
+  }
+
   render() {
+    // console.log(this.state.productData);
     return (
       <Router>
         <div className="App">
@@ -117,7 +139,12 @@ class App extends Component {
             <div className="sidebar-container">
               <Search
                 text={this.state.searchText}
-                productData={this.state.productData}
+                updateText={e => this.updateText(e)}
+                productData={
+                  this.state.productData.filter(
+                    data => data.suggest,
+                  )
+                }
                 selectProduct={id => this.selectProduct(id)}
               />
             </div>

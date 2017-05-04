@@ -5,7 +5,7 @@ const Search = ({ text, updateText, productData, selectProduct }) => (
   <div>
     <input
       type="text"
-      value={text && text !== ''}
+      value={text}
       onChange={e => updateText(e)}
       placeholder="type product here"
     />
