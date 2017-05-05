@@ -144,6 +144,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.farm);
     return (
       <Router>
         <div className="App">
@@ -179,6 +180,7 @@ class App extends Component {
               activeFarm={id => this.activeFarm(id)}
               changeDuration={id => this.changeDuration(id)}
               duration={this.state.duration}
+              loading={this.state.loading}
             />
             <PropsRoute
               exact path="/corr"
