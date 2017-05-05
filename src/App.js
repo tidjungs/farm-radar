@@ -45,12 +45,12 @@ const PropsRoute = ({ component, ...rest }) =>
 //   opacity: '0.6',
 // };
 
-const farm = [
-  { farm_id: 1, farm_name: 'ฟาม1', farm_avg: '40', active: true },
-  { farm_id: 2, farm_name: 'farm2', farm_avg: '35', active: true },
-  { farm_id: 3, farm_name: 'farm3', farm_avg: '35', active: true },
-  { farm_id: 4, farm_name: 'farm4', farm_avg: '60', active: true },
-];
+// const farm = [
+//   { farm_id: 1, farm_name: 'ฟาม1', farm_avg: '40', active: true },
+//   { farm_id: 2, farm_name: 'farm2', farm_avg: '35', active: true },
+//   { farm_id: 3, farm_name: 'farm3', farm_avg: '35', active: true },
+//   { farm_id: 4, farm_name: 'farm4', farm_avg: '60', active: true },
+// ];
 
 class App extends Component {
   constructor() {
@@ -59,13 +59,13 @@ class App extends Component {
       name: 'FARM RADAR',
       loading: false,
       data: [
-        { id: 1, name: 'JAN', type: 'week', ฟาม1: 4000, farm2: 2400, farm3: 1600, farm4: 3200 },
-        { id: 2, name: 'FEB', type: 'week', ฟาม1: 3000, farm2: 1398, farm3: 1800, farm4: 2500 },
-        { id: 3, name: 'MAR', type: 'week', ฟาม1: 2000, farm2: 9800, farm3: 2400, farm4: 1600 },
-        { id: 4, name: 'APR', type: 'week', ฟาม1: 2780, farm2: 3908, farm3: 3600, farm4: 2500 },
-        { id: 5, name: 'MAY', type: 'week', ฟาม1: 1890, farm2: 4800, farm3: 1700, farm4: 3300 },
-        { id: 6, name: 'JUN', type: 'week', ฟาม1: 2390, farm2: 3800, farm3: 2200, farm4: 3000 },
-        { id: 7, name: 'JUL', type: 'week', ฟาม1: 3490, farm2: 4300, farm3: 1300, farm4: 3200 },
+      //   { id: 1, name: 'JAN', type: 'week', ฟาม1: 4000, farm2: 2400, farm3: 1600, farm4: 3200 },
+      //   { id: 2, name: 'FEB', type: 'week', ฟาม1: 3000, farm2: 1398, farm3: 1800, farm4: 2500 },
+      //   { id: 3, name: 'MAR', type: 'week', ฟาม1: 2000, farm2: 9800, farm3: 2400, farm4: 1600 },
+      //   { id: 4, name: 'APR', type: 'week', ฟาม1: 2780, farm2: 3908, farm3: 3600, farm4: 2500 },
+      //   { id: 5, name: 'MAY', type: 'week', ฟาม1: 1890, farm2: 4800, farm3: 1700, farm4: 3300 },
+      //   { id: 6, name: 'JUN', type: 'week', ฟาม1: 2390, farm2: 3800, farm3: 2200, farm4: 3000 },
+      //   { id: 7, name: 'JUL', type: 'week', ฟาม1: 3490, farm2: 4300, farm3: 1300, farm4: 3200 },
       ],
       duration: [
         { id: 1, name: '1W', active: true, key: 'week' },
@@ -79,7 +79,7 @@ class App extends Component {
         { x: 170, y: 300, z: 400 }, { x: 140, y: 250, z: 280 },
         { x: 150, y: 400, z: 500 }, { x: 110, y: 280, z: 200 },
       ],
-      farm: mapColorWithFarm(farm),
+      farm: [],
       searchText: '',
       productData: [
         { id: 854569, name: 'swine', active: true, suggest: true },
@@ -91,6 +91,9 @@ class App extends Component {
         { id: 11357, name: 'casava30', active: false, suggest: true },
       ],
     };
+  }
+  componentWillMount() {
+    this.loadData(854569);
   }
   async loadData(id) {
     this.setState({
@@ -146,7 +149,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.farm);
     return (
       <Router>
         <div className="App">
