@@ -1,3 +1,5 @@
+/* eslint no-bitwise: [2, { int32Hint: true }] */
+
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
 // import Halogen from 'halogen';
@@ -44,10 +46,10 @@ const PropsRoute = ({ component, ...rest }) =>
 // };
 
 const farm = [
-  { farm_id: 1, name: 'ฟาม1', farm_avg: '$40', active: true },
-  { farm_id: 2, name: 'farm2', farm_avg: '$35', active: true },
-  { farm_id: 3, name: 'farm3', farm_avg: '$35', active: true },
-  { farm_id: 4, name: 'farm4', farm_avg: '$60', active: true },
+  { farm_id: 1, farm_name: 'ฟาม1', farm_avg: '40', active: true },
+  { farm_id: 2, farm_name: 'farm2', farm_avg: '35', active: true },
+  { farm_id: 3, farm_name: 'farm3', farm_avg: '35', active: true },
+  { farm_id: 4, farm_name: 'farm4', farm_avg: '60', active: true },
 ];
 
 class App extends Component {
@@ -96,11 +98,14 @@ class App extends Component {
     });
     const response = await fetch(`https://shrouded-tundra-34049.herokuapp.com/price/${id}`);
     const res = await response.json();
+    console.log(res.farm.map(f =>
+      ({ ...f, active: true, farm_avg: +f.farm_avg }),
+    ));
     this.setState({
       data: res.data,
       farm: mapColorWithFarm(
         res.farm.map(f =>
-          ({ ...f, active: true }),
+          ({ ...f, active: true, farm_avg: f.farm_avg | 0 }),
         ),
       ),
       loading: false,

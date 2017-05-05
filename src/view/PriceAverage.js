@@ -23,7 +23,7 @@ class PriceAverage extends React.Component {
         {
           farm.map(f =>
             <MovingAvgCard
-              name={f.name}
+              name={f.farm_name}
               color={f.color}
               mAvg={f.farm_avg}
               key={f.farm_id}
