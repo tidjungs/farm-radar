@@ -44,7 +44,7 @@ const PropsRoute = ({ component, ...rest }) =>
 // };
 
 const farm = [
-  { farm_id: 1, name: 'farm1', farm_avg: '$40', active: true },
+  { farm_id: 1, name: 'ฟาม1', farm_avg: '$40', active: true },
   { farm_id: 2, name: 'farm2', farm_avg: '$35', active: true },
   { farm_id: 3, name: 'farm3', farm_avg: '$35', active: true },
   { farm_id: 4, name: 'farm4', farm_avg: '$60', active: true },
@@ -57,13 +57,13 @@ class App extends Component {
       name: 'FARM RADAR',
       loading: false,
       data: [
-        { id: 1, name: 'JAN', type: 'week', farm1: 4000, farm2: 2400, farm3: 1600, farm4: 3200 },
-        { id: 2, name: 'FEB', type: 'week', farm1: 3000, farm2: 1398, farm3: 1800, farm4: 2500 },
-        { id: 3, name: 'MAR', type: 'week', farm1: 2000, farm2: 9800, farm3: 2400, farm4: 1600 },
-        { id: 4, name: 'APR', type: 'week', farm1: 2780, farm2: 3908, farm3: 3600, farm4: 2500 },
-        { id: 5, name: 'MAY', type: 'week', farm1: 1890, farm2: 4800, farm3: 1700, farm4: 3300 },
-        { id: 6, name: 'JUN', type: 'week', farm1: 2390, farm2: 3800, farm3: 2200, farm4: 3000 },
-        { id: 7, name: 'JUL', type: 'week', farm1: 3490, farm2: 4300, farm3: 1300, farm4: 3200 },
+        { id: 1, name: 'JAN', type: 'week', ฟาม1: 4000, farm2: 2400, farm3: 1600, farm4: 3200 },
+        { id: 2, name: 'FEB', type: 'week', ฟาม1: 3000, farm2: 1398, farm3: 1800, farm4: 2500 },
+        { id: 3, name: 'MAR', type: 'week', ฟาม1: 2000, farm2: 9800, farm3: 2400, farm4: 1600 },
+        { id: 4, name: 'APR', type: 'week', ฟาม1: 2780, farm2: 3908, farm3: 3600, farm4: 2500 },
+        { id: 5, name: 'MAY', type: 'week', ฟาม1: 1890, farm2: 4800, farm3: 1700, farm4: 3300 },
+        { id: 6, name: 'JUN', type: 'week', ฟาม1: 2390, farm2: 3800, farm3: 2200, farm4: 3000 },
+        { id: 7, name: 'JUL', type: 'week', ฟาม1: 3490, farm2: 4300, farm3: 1300, farm4: 3200 },
       ],
       duration: [
         { id: 1, name: '1W', active: true },
@@ -114,6 +114,21 @@ class App extends Component {
     });
     this.loadData(id);
   }
+  activeFarm(id) {
+    this.setState({
+      farm: this.state.farm.map(f =>
+        (f.farm_id === id ? { ...f, active: !f.active } : f),
+      ),
+    });
+  }
+
+  changeDuration(index) {
+    this.setState({
+      duration: this.state.duration.map(d =>
+        (d.id === index ? { ...d, active: true } : { ...d, active: false }),
+      ),
+    });
+  }
 
   updateText(e) {
     this.setState({
@@ -159,8 +174,11 @@ class App extends Component {
             <PropsRoute
               exact path="/"
               component={PriceAverage}
-              data={this.state.data}
-              farm={farm}
+              data={this.state.data.filter(d => d.type === 'week')}
+              farm={this.state.farm}
+              activeFarm={id => this.activeFarm(id)}
+              changeDuration={id => this.changeDuration(id)}
+              duration={this.state.duration}
             />
             <PropsRoute
               exact path="/corr"

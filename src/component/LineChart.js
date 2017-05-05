@@ -28,8 +28,9 @@ const Chart = ({ data, farm }) => (
       />
       {
 
-        farm.map(({ farm_id, name, color, active }) =>
-          active &&
+        farm.map(({ farm_id, name, color, active }) => {
+          console.log('');
+          return active &&
           <Line
             key={farm_id}
             type="monotone"
@@ -37,8 +38,8 @@ const Chart = ({ data, farm }) => (
             stroke={color}
             activeDot={{ r: 8 }}
             strokeWidth={3}
-          />,
-        )
+          />;
+        })
       }
     </LineChart>
   </ResponsiveContainer>
