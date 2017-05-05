@@ -98,9 +98,6 @@ class App extends Component {
     });
     const response = await fetch(`https://shrouded-tundra-34049.herokuapp.com/price/${id}`);
     const res = await response.json();
-    console.log(res.farm.map(f =>
-      ({ ...f, active: true, farm_avg: +f.farm_avg }),
-    ));
     this.setState({
       data: res.data,
       farm: mapColorWithFarm(

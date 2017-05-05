@@ -10,7 +10,7 @@ const MovingAvgCard = ({ name, mAvg, color, activeFarm, id, active }) => (
       <div className="top">
         <div className="name">
           <div className="icon" style={{ background: color }} />
-          { name }
+          <div className="farm-name">{ name }</div>
         </div>
       </div>
       <div className="bottom">
