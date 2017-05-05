@@ -68,11 +68,11 @@ class App extends Component {
         { id: 7, name: 'JUL', type: 'week', ฟาม1: 3490, farm2: 4300, farm3: 1300, farm4: 3200 },
       ],
       duration: [
-        { id: 1, name: '1W', active: true },
-        { id: 2, name: '1M', active: false },
-        { id: 3, name: '1Y', active: false },
-        { id: 4, name: '2Y', active: false },
-        { id: 5, name: '5Y', active: false },
+        { id: 1, name: '1W', active: true, key: 'week' },
+        { id: 2, name: '1M', active: false, key: 'month' },
+        { id: 3, name: '1Y', active: false, key: 'year' },
+        { id: 4, name: '2Y', active: false, key: '2year' },
+        { id: 5, name: '5Y', active: false, key: '5year' },
       ],
       corr: [
         { x: 100, y: 200, z: 200 }, { x: 120, y: 100, z: 260 },
@@ -177,7 +177,9 @@ class App extends Component {
             <PropsRoute
               exact path="/"
               component={PriceAverage}
-              data={this.state.data.filter(d => d.type === 'week')}
+              data={this.state.data.filter(d =>
+                d.type === this.state.duration.filter(t => t.active)[0].key,
+              )}
               farm={this.state.farm}
               activeFarm={id => this.activeFarm(id)}
               changeDuration={id => this.changeDuration(id)}
