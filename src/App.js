@@ -2,7 +2,6 @@
 /* eslint-disable camelcase*/
 
 import React, { Component } from 'react';
-import fetch from 'isomorphic-fetch';
 import { GridLoader } from 'halogen';
 
 
@@ -19,7 +18,7 @@ import Search from './view/Search';
 import './App.css';
 import mapColorWithFarm from './utils/color';
 import getName from './utils/name';
-import { loadCorrData } from './request';
+import { loadCorrData, loadPriceData } from './request';
 // import test from './utils/loading';
 
 const renderMergedProps = (component, ...rest) => {
@@ -49,13 +48,6 @@ const styles = {
   opacity: '0.6',
 };
 
-// const farm = [
-//   { farm_id: 1, farm_name: 'ฟาม1', farm_avg: '40', active: true },
-//   { farm_id: 2, farm_name: 'farm2', farm_avg: '35', active: true },
-//   { farm_id: 3, farm_name: 'farm3', farm_avg: '35', active: true },
-//   { farm_id: 4, farm_name: 'farm4', farm_avg: '60', active: true },
-// ];
-
 class App extends Component {
   constructor() {
     super();
@@ -63,15 +55,7 @@ class App extends Component {
       name: 'FARM RADAR',
       corr: false,
       loading: false,
-      data: [
-      //   { id: 1, name: 'JAN', type: 'week', ฟาม1: 4000, farm2: 2400, farm3: 1600, farm4: 3200 },
-      //   { id: 2, name: 'FEB', type: 'week', ฟาม1: 3000, farm2: 1398, farm3: 1800, farm4: 2500 },
-      //   { id: 3, name: 'MAR', type: 'week', ฟาม1: 2000, farm2: 9800, farm3: 2400, farm4: 1600 },
-      //   { id: 4, name: 'APR', type: 'week', ฟาม1: 2780, farm2: 3908, farm3: 3600, farm4: 2500 },
-      //   { id: 5, name: 'MAY', type: 'week', ฟาม1: 1890, farm2: 4800, farm3: 1700, farm4: 3300 },
-      //   { id: 6, name: 'JUN', type: 'week', ฟาม1: 2390, farm2: 3800, farm3: 2200, farm4: 3000 },
-      //   { id: 7, name: 'JUL', type: 'week', ฟาม1: 3490, farm2: 4300, farm3: 1300, farm4: 3200 },
-      ],
+      data: [],
       duration: [
         { id: 1, name: '1W', active: true, key: 'week' },
         { id: 2, name: '1M', active: false, key: 'month' },
@@ -79,11 +63,7 @@ class App extends Component {
         { id: 4, name: '1Y', active: false, key: 'year' },
         // { id: 5, name: '5Y', active: false, key: '5year' },
       ],
-      corrData: [
-        { x: 100, y: 200, z: 200 }, { x: 120, y: 100, z: 260 },
-        { x: 170, y: 300, z: 400 }, { x: 140, y: 250, z: 280 },
-        { x: 150, y: 400, z: 500 }, { x: 110, y: 280, z: 200 },
-      ],
+      corrData: [],
       keyX: 'x',
       keyY: 'y',
       farm: [],
@@ -123,13 +103,12 @@ class App extends Component {
     this.setState({
       loading: true,
     });
-    const response = await fetch(`https://shrouded-tundra-34049.herokuapp.com/price/${id}`);
-    const res = await response.json();
+    const res = await loadPriceData(id);
     this.setState({
       data: res.data,
       farm: mapColorWithFarm(
         res.farm.map(f =>
-          ({ ...f, active: true, farm_avg: `$${f.farm_avg | 0}` }),
+          ({ ...f, active: true }),
         ),
       ),
       loading: false,
@@ -219,9 +198,10 @@ class App extends Component {
         <div className="App">
           <div className="App-header">
             <p>{ this.state.name }</p>
+            <Router basename="/farm-radar" />
             <Link onClick={() => this.disCorr()} to="/"><p>Price</p></Link>
             <Link onClick={() => this.corr()} to="/corr"><p>Corr</p></Link>
-            {/* <Link onClick={() => this.disCorr()} to="/info"><p>Info</p></Link> */}
+            { <Link onClick={() => this.disCorr()} to="/info"><p>Info</p></Link> }
           </div>
           <div className="App-container">
             {
@@ -256,6 +236,7 @@ class App extends Component {
                   />
               }
             </div>
+            <Router basename="/farm-radar" />
             <PropsRoute
               exact path="/"
               component={PriceAverage}
