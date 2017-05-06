@@ -17,6 +17,7 @@ import PlantInfo from './view/PlantInfo';
 import Search from './view/Search';
 import './App.css';
 import mapColorWithFarm from './utils/color';
+import getName from './utils/name';
 import { loadCorrData } from './request';
 // import test from './utils/loading';
 
@@ -265,10 +266,7 @@ class App extends Component {
               corrValue={this.state.corrValue}
               component={PriceCorrelation}
               data={this.state.corrData}
-              name={this.state.productCorr.filter(
-                p => this.state.selectedCorr.includes(p.id)).map(
-                  p => p.name,
-              )}
+              name={getName(this.state.productCorr, this.state.selectedCorr)}
             />
             <PropsRoute
               exact path="/info"
