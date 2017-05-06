@@ -57,6 +57,7 @@ class App extends Component {
     super();
     this.state = {
       name: 'FARM RADAR',
+      corr: false,
       loading: false,
       data: [
       //   { id: 1, name: 'JAN', type: 'week', ฟาม1: 4000, farm2: 2400, farm3: 1600, farm4: 3200 },
@@ -70,11 +71,11 @@ class App extends Component {
       duration: [
         { id: 1, name: '1W', active: true, key: 'week' },
         { id: 2, name: '1M', active: false, key: 'month' },
-        { id: 3, name: '1Y', active: false, key: 'year' },
-        { id: 4, name: '2Y', active: false, key: '2year' },
-        { id: 5, name: '5Y', active: false, key: '5year' },
+        { id: 3, name: '6M', active: false, key: 'halfyear' },
+        { id: 4, name: '1Y', active: false, key: 'year' },
+        // { id: 5, name: '5Y', active: false, key: '5year' },
       ],
-      corr: [
+      corrData: [
         { x: 100, y: 200, z: 200 }, { x: 120, y: 100, z: 260 },
         { x: 170, y: 300, z: 400 }, { x: 140, y: 250, z: 280 },
         { x: 150, y: 400, z: 500 }, { x: 110, y: 280, z: 200 },
@@ -84,6 +85,15 @@ class App extends Component {
       productData: [
         { id: 854569, name: 'swine', active: true, suggest: true },
         { id: 920215, name: 'broiler', active: false, suggest: true },
+        { id: 111185, name: 'eggs', active: false, suggest: true },
+        { id: 446789, name: 'eggs3', active: false, suggest: true },
+        { id: 446790, name: 'eggs4', active: false, suggest: true },
+        { id: 11331, name: 'casava25', active: false, suggest: true },
+        { id: 11357, name: 'casava30', active: false, suggest: true },
+      ],
+      productCorr: [
+        { id: 854569, name: 'swine', active: true, suggest: true },
+        { id: 920215, name: 'broiler', active: true, suggest: true },
         { id: 111185, name: 'eggs', active: false, suggest: true },
         { id: 446789, name: 'eggs3', active: false, suggest: true },
         { id: 446790, name: 'eggs4', active: false, suggest: true },
@@ -148,15 +158,27 @@ class App extends Component {
     });
   }
 
+  disCorr() {
+    this.setState({
+      corr: false,
+    });
+  }
+
+  corr() {
+    this.setState({
+      corr: true,
+    });
+  }
+
   render() {
     return (
       <Router>
         <div className="App">
           <div className="App-header">
             <p>{ this.state.name }</p>
-            <Link to="/"><p>Price</p></Link>
-            <Link to="/corr"><p>Corr</p></Link>
-            <Link to="/info"><p>Info</p></Link>
+            <Link onClick={() => this.disCorr()} to="/"><p>Price</p></Link>
+            <Link onClick={() => this.corr()} to="/corr"><p>Corr</p></Link>
+            <Link onClick={() => this.disCorr()} to="/info"><p>Info</p></Link>
           </div>
           <div className="App-container">
             {
@@ -164,16 +186,30 @@ class App extends Component {
               <div style={styles}><GridLoader color={color} size={25} /></div>
             }
             <div className="sidebar-container">
-              <Search
-                text={this.state.searchText}
-                updateText={e => this.updateText(e)}
-                productData={
-                  this.state.productData.filter(
-                    data => data.suggest,
-                  )
-                }
-                selectProduct={id => this.selectProduct(id)}
-              />
+              {
+                this.state.corr ?
+                  <Search
+                    text={this.state.searchText}
+                    updateText={e => this.updateText(e)}
+                    productData={
+                      this.state.productCorr.filter(
+                        data => data.suggest,
+                      )
+                    }
+                    selectProduct={id => this.selectProduct(id)}
+                  />
+                :
+                  <Search
+                    text={this.state.searchText}
+                    updateText={e => this.updateText(e)}
+                    productData={
+                      this.state.productData.filter(
+                        data => data.suggest,
+                      )
+                    }
+                    selectProduct={id => this.selectProduct(id)}
+                  />
+              }
             </div>
             <PropsRoute
               exact path="/"
@@ -190,7 +226,7 @@ class App extends Component {
             <PropsRoute
               exact path="/corr"
               component={PriceCorrelation}
-              data={this.state.corr}
+              data={this.state.corrData}
             />
             <PropsRoute
               exact path="/info"
