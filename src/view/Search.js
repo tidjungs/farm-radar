@@ -1,9 +1,11 @@
 import React from 'react';
 import SearchCard from '../component/SearchCard';
+import './Search.css';
 
 const Search = ({ text, updateText, productData, selectProduct }) => (
   <div>
     <input
+      className="search-box"
       type="text"
       value={text}
       onChange={e => updateText(e)}
