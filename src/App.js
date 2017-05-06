@@ -219,8 +219,8 @@ class App extends Component {
         <div className="App">
           <div className="App-header">
             <p>{ this.state.name }</p>
-            <Link onClick={() => this.disCorr()} to="/"><p>Price</p></Link>
-            <Link onClick={() => this.corr()} to="/corr"><p>Corr</p></Link>
+            <Link onClick={() => this.disCorr()} to="/farm-radar"><p>Price</p></Link>
+            <Link onClick={() => this.corr()} to="/farm-radar/corr"><p>Corr</p></Link>
             {/* <Link onClick={() => this.disCorr()} to="/info"><p>Info</p></Link> */}
           </div>
           <div className="App-container">
@@ -257,7 +257,7 @@ class App extends Component {
               }
             </div>
             <PropsRoute
-              exact path="/"
+              exact path="/farm-radar"
               component={PriceAverage}
               data={this.state.data.filter(d =>
                 d.type === this.state.duration.filter(t => t.active)[0].key,
@@ -269,7 +269,7 @@ class App extends Component {
               loading={this.state.loading}
             />
             <PropsRoute
-              exact path="/corr"
+              exact path="/farm-radar/corr"
               corrValue={this.state.corrValue}
               component={PriceCorrelation}
               data={this.state.corrData}
