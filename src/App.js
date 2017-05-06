@@ -91,6 +91,7 @@ class App extends Component {
         { id: 11331, name: 'casava25', active: false, suggest: true },
         { id: 11357, name: 'casava30', active: false, suggest: true },
       ],
+      selectedCorr: [854569, 920215],
       productCorr: [
         { id: 854569, name: 'swine', active: true, suggest: true },
         { id: 920215, name: 'broiler', active: true, suggest: true },
@@ -157,6 +158,17 @@ class App extends Component {
       searchText: e.target.value,
     });
   }
+  selectCorr(id) {
+    const selectedCorr = this.state.selectedCorr;
+    selectedCorr.shift();
+    selectedCorr.push(id);
+    this.setState({
+      selectedCorr,
+      productCorr: this.state.productCorr.map(c =>
+        (selectedCorr.includes(c.id) ? { ...c, active: true } : { ...c, active: false }),
+      ),
+    });
+  }
 
   disCorr() {
     this.setState({
@@ -196,7 +208,7 @@ class App extends Component {
                         data => data.suggest,
                       )
                     }
-                    selectProduct={id => this.selectProduct(id)}
+                    selectProduct={id => this.selectCorr(id)}
                   />
                 :
                   <Search
