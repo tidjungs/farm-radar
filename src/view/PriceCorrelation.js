@@ -16,7 +16,6 @@ class PriceCorrelation extends Component {
       ],
     };
   }
-
   changeDuration(index) {
     this.setState({
       duration: this.state.duration.map(d =>

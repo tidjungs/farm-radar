@@ -201,6 +201,7 @@ class App extends Component {
   }
 
   corr() {
+    this.loadCorr();
     this.setState({
       corr: true,
     });

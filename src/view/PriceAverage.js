@@ -27,7 +27,7 @@ class PriceAverage extends React.Component {
             <MovingAvgCard
               name={f.farm_name}
               color={f.color}
-              mAvg={f.farm_avg}
+              mAvg={f[`farm_avg_${duration.filter(d => d.active)[0].key}`]}
               key={f.farm_id}
               id={f.farm_id}
               active={f.active ? 1 : 0.4}
