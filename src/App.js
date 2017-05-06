@@ -105,7 +105,7 @@ class App extends Component {
       data: res.data,
       farm: mapColorWithFarm(
         res.farm.map(f =>
-          ({ ...f, active: true, farm_avg: f.farm_avg | 0 }),
+          ({ ...f, active: true, farm_avg: `$${f.farm_avg | 0}` }),
         ),
       ),
       loading: false,
