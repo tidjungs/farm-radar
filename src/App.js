@@ -86,6 +86,7 @@ class App extends Component {
       keyY: 'y',
       farm: [],
       searchText: '',
+      searchCorrText: '',
       productData: [
         { id: 854569, name: 'swine', active: true, suggest: true },
         { id: 920215, name: 'broiler', active: false, suggest: true },
@@ -152,15 +153,18 @@ class App extends Component {
   }
 
   updateText(e) {
+    const keyText = this.state.corr ? 'searchCorrText' : 'searchText';
+    const key = this.state.corr ? 'productCorr' : 'productData';
+    const target = this.state.corr ? this.state.productCorr : this.state.productData;
     this.setState({
-      productData: this.state.productData.map(data =>
+      [key]: target.map(data =>
         (
           data.name.includes(e.target.value) ?
             { ...data, suggest: true } :
             { ...data, suggest: false }
         ),
       ),
-      searchText: e.target.value,
+      [keyText]: e.target.value,
     });
   }
   async loadCorr() {
@@ -222,7 +226,7 @@ class App extends Component {
               {
                 this.state.corr ?
                   <Search
-                    text={this.state.searchText}
+                    text={this.state.searchCorrText}
                     updateText={e => this.updateText(e)}
                     productData={
                       this.state.productCorr.filter(
