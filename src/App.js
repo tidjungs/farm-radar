@@ -221,7 +221,7 @@ class App extends Component {
             <p>{ this.state.name }</p>
             <Link onClick={() => this.disCorr()} to="/"><p>Price</p></Link>
             <Link onClick={() => this.corr()} to="/corr"><p>Corr</p></Link>
-            <Link onClick={() => this.disCorr()} to="/info"><p>Info</p></Link>
+            {/* <Link onClick={() => this.disCorr()} to="/info"><p>Info</p></Link> */}
           </div>
           <div className="App-container">
             {

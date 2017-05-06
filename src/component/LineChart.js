@@ -36,7 +36,7 @@ const Chart = ({ data, farm }) => (
             dataKey={farm_name}
             stroke={color}
             activeDot={{ r: 8 }}
-            strokeWidth={1}
+            strokeWidth={3}
           />,
         )
       }
