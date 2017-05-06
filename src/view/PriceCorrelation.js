@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TimeSelect from '../component/TimeSelect';
 import CorrelationChart from '../component/CorrelationChart';
+import { filterData, correlationWord, correlationColor } from '../utils/correlation';
 import './PriceCorelation.css';
 
 class PriceCorrelation extends Component {
@@ -8,11 +9,10 @@ class PriceCorrelation extends Component {
     super();
     this.state = {
       duration: [
-        { id: 1, name: '1W', active: true },
-        { id: 2, name: '1M', active: false },
-        { id: 3, name: '1Y', active: false },
-        { id: 4, name: '2Y', active: false },
-        { id: 5, name: '5Y', active: false },
+        { id: 1, name: '1W', active: true, key: 'week' },
+        { id: 2, name: '1M', active: false, key: 'month' },
+        { id: 3, name: '6M', active: false, key: 'halfyear' },
+        { id: 4, name: '1Y', active: false, key: 'year' },
       ],
     };
   }
@@ -25,6 +25,8 @@ class PriceCorrelation extends Component {
   }
 
   render() {
+    const key = this.state.duration.filter(d => d.active)[0].key;
+    const val = Math.round(this.props.corrValue[`corr_${key}`] * 10) / 10;
     return (
       <div className="content-container">
         <TimeSelect
@@ -33,16 +35,16 @@ class PriceCorrelation extends Component {
         />
         <div className="correlation-chart-container">
           <CorrelationChart
-            data={this.props.data}
+            data={filterData(this.props.data, key)}
             name={this.props.name}
           />
         </div>
         <div className="correlation-data-container">
-          <div className="correlation-data">
-            <p>{ this.props.corrValue ? this.props.corrValue.toFixed(1) : '-' }</p>
+          <div className="correlation-data" style={{ borderColor: correlationColor(val) }}>
+            <p>{ val }</p>
           </div>
-          <div className="correlation-data">
-            <p>positive corelation</p>
+          <div className="correlation-data" style={{ borderColor: correlationColor(val) }}>
+            <p>{ correlationWord(val) }</p>
           </div>
         </div>
       </div>

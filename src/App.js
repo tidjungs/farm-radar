@@ -1,4 +1,5 @@
 /* eslint no-bitwise: [2, { int32Hint: true }] */
+/* eslint-disable camelcase*/
 
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
@@ -107,7 +108,12 @@ class App extends Component {
         { id: 11331, name: 'casava25', active: false, suggest: true },
         { id: 11357, name: 'casava30', active: false, suggest: true },
       ],
-      corrValue: 0,
+      corrValue: {
+        corr_week: 0,
+        corr_month: 9,
+        corr_halfyear: 0,
+        corr_year: 0,
+      },
     };
   }
   componentWillMount() {
