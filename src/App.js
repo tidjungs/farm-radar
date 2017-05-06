@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
-import Halogen from 'halogen';
+import { GridLoader } from 'halogen';
 
 import {
   BrowserRouter as Router,
@@ -33,13 +33,13 @@ const PropsRoute = ({ component, ...rest }) =>
   />
 );
 
-const color = 'red';
+const color = '#A0E9D4';
 
 const styles = {
   position: 'absolute',
   width: '100%',
   height: '100%',
-  paddingLeft: '55%',
+  paddingLeft: '60%',
   paddingTop: '15%',
   background: 'black',
   opacity: '0.6',
@@ -161,7 +161,7 @@ class App extends Component {
           <div className="App-container">
             {
               this.state.loading &&
-              <div style={styles}><Halogen.GridLoader color={color} size={25} /></div>
+              <div style={styles}><GridLoader color={color} size={25} /></div>
             }
             <div className="sidebar-container">
               <Search

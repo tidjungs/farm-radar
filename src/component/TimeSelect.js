@@ -6,8 +6,8 @@ const TimeSelect = ({ duration, changeDuration }) => (
       duration.map(d =>
         <button
           style={d.active ?
-            { background: '#e0e0e0', color: '#484856' } :
-            { background: '#484856', color: '#e0e0e0' }}
+            { background: '#e0e0e0', color: '#354459' } :
+            { background: '#354459', color: '#e0e0e0' }}
           key={d.id}
           onClick={() => changeDuration(d.id)}
         >

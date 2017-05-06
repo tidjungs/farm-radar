@@ -1,8 +1,11 @@
 import React from 'react';
 
 const SearchCard = ({ productName, selectProduct, active }) => (
-  <div style={active ? { background: 'red' } : { background: 'white' }}>
-    <button onClick={() => selectProduct()}>
+  <div
+    className="search-card"
+    style={active ? { background: '#A0E9D4' } : { background: 'none' }}
+  >
+    <button className="product-btn" onClick={() => selectProduct()}>
       { productName }
     </button>
   </div>

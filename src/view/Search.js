@@ -3,7 +3,7 @@ import SearchCard from '../component/SearchCard';
 import './Search.css';
 
 const Search = ({ text, updateText, productData, selectProduct }) => (
-  <div>
+  <div className="search-container">
     <input
       className="search-box"
       type="text"

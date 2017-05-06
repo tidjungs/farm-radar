@@ -19,7 +19,7 @@
 }
 
 .sidebar-container {
-  background: #1abc9c;
+  background: #17B897;
   width: 25%;
 }
 
@@ -27,7 +27,8 @@
   width: 75%;
   display: flex;
   flex-direction: column;
-  background: #484856;
+  /*background: #484856;*/
+  background: #354459;
 }
 
 .correlation-chart-container {
