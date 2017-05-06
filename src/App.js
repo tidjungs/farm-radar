@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
-// import Halogen from 'halogen';
+import Halogen from 'halogen';
 
 import {
   BrowserRouter as Router,
@@ -33,17 +33,17 @@ const PropsRoute = ({ component, ...rest }) =>
   />
 );
 
-// const color = 'red';
+const color = 'red';
 
-// const styles = {
-//   position: 'absolute',
-//   width: '100%',
-//   height: '100%',
-//   paddingLeft: '55%',
-//   paddingTop: '15%',
-//   background: 'black',
-//   opacity: '0.6',
-// };
+const styles = {
+  position: 'absolute',
+  width: '100%',
+  height: '100%',
+  paddingLeft: '55%',
+  paddingTop: '15%',
+  background: 'black',
+  opacity: '0.6',
+};
 
 // const farm = [
 //   { farm_id: 1, farm_name: 'ฟาม1', farm_avg: '40', active: true },
@@ -153,17 +153,16 @@ class App extends Component {
       <Router>
         <div className="App">
           <div className="App-header">
-            <button onClick={() => this.loadData()}>GET DATA</button>
             <p>{ this.state.name }</p>
             <Link to="/"><p>Price</p></Link>
             <Link to="/corr"><p>Corr</p></Link>
             <Link to="/info"><p>Info</p></Link>
           </div>
           <div className="App-container">
-            {/*
+            {
               this.state.loading &&
-              <div style={styles}><Halogen.DotLoader color={color} /></div>
-            */}
+              <div style={styles}><Halogen.GridLoader color={color} size={25} /></div>
+            }
             <div className="sidebar-container">
               <Search
                 text={this.state.searchText}
