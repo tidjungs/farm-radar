@@ -7,7 +7,9 @@ import TimeSelect from '../component/TimeSelect';
 
 class PriceAverage extends React.Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.loading === false;
+    return (!nextProps.loading && this.props.loading) ||
+      (nextProps.duration !== this.props.duration) ||
+      (nextProps.farm !== this.props.farm);
   }
   render() {
     const { duration, changeDuration, farm, data, activeFarm } = this.props;
