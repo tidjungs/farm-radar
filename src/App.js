@@ -16,6 +16,7 @@ import PlantInfo from './view/PlantInfo';
 import Search from './view/Search';
 import './App.css';
 import mapColorWithFarm from './utils/color';
+import { loadCorrData } from './request';
 // import test from './utils/loading';
 
 const renderMergedProps = (component, ...rest) => {
@@ -80,6 +81,8 @@ class App extends Component {
         { x: 170, y: 300, z: 400 }, { x: 140, y: 250, z: 280 },
         { x: 150, y: 400, z: 500 }, { x: 110, y: 280, z: 200 },
       ],
+      keyX: 'x',
+      keyY: 'y',
       farm: [],
       searchText: '',
       productData: [
@@ -158,15 +161,21 @@ class App extends Component {
       searchText: e.target.value,
     });
   }
-  selectCorr(id) {
+  async selectCorr(id) {
     const selectedCorr = this.state.selectedCorr;
     selectedCorr.shift();
     selectedCorr.push(id);
     this.setState({
+      loading: true,
       selectedCorr,
       productCorr: this.state.productCorr.map(c =>
         (selectedCorr.includes(c.id) ? { ...c, active: true } : { ...c, active: false }),
       ),
+    });
+    const { data } = await loadCorrData(selectedCorr[0], selectedCorr[1]);
+    this.setState({
+      loading: false,
+      corrData: data,
     });
   }
 
@@ -239,6 +248,10 @@ class App extends Component {
               exact path="/corr"
               component={PriceCorrelation}
               data={this.state.corrData}
+              name={this.state.productCorr.filter(
+                p => this.state.selectedCorr.includes(p.id)).map(
+                  p => p.name,
+              )}
             />
             <PropsRoute
               exact path="/info"
