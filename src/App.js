@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
 import { GridLoader } from 'halogen';
 
+
 import {
   BrowserRouter as Router,
   Route,
@@ -104,6 +105,7 @@ class App extends Component {
         { id: 11331, name: 'casava25', active: false, suggest: true },
         { id: 11357, name: 'casava30', active: false, suggest: true },
       ],
+      corrValue: 0,
     };
   }
   componentWillMount() {
@@ -161,6 +163,18 @@ class App extends Component {
       searchText: e.target.value,
     });
   }
+  async loadCorr() {
+    this.setState({
+      loading: true,
+    });
+    const [a, b] = this.state.selectedCorr;
+    const { data, corr } = await loadCorrData(a, b);
+    this.setState({
+      loading: false,
+      corrData: data,
+      corrValue: corr,
+    });
+  }
   async selectCorr(id) {
     const selectedCorr = this.state.selectedCorr;
     selectedCorr.shift();
@@ -172,11 +186,7 @@ class App extends Component {
         (selectedCorr.includes(c.id) ? { ...c, active: true } : { ...c, active: false }),
       ),
     });
-    const { data } = await loadCorrData(selectedCorr[0], selectedCorr[1]);
-    this.setState({
-      loading: false,
-      corrData: data,
-    });
+    this.loadCorr();
   }
 
   disCorr() {
@@ -204,7 +214,9 @@ class App extends Component {
           <div className="App-container">
             {
               this.state.loading &&
-              <div style={styles}><GridLoader color={color} size={25} /></div>
+              <div style={styles}>
+                <GridLoader color={color} size={25} />
+              </div>
             }
             <div className="sidebar-container">
               {
@@ -246,6 +258,7 @@ class App extends Component {
             />
             <PropsRoute
               exact path="/corr"
+              corrValue={this.state.corrValue}
               component={PriceCorrelation}
               data={this.state.corrData}
               name={this.state.productCorr.filter(

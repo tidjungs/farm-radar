@@ -2,11 +2,12 @@ import React from 'react';
 import { ScatterChart, Scatter, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const CorrelationChart = ({ data, name }) => (
-  <ResponsiveContainer width="50%" height={400}>
+  <ResponsiveContainer width="90%" height={400}>
     <ScatterChart
       margin={{ top: 30, right: 0, left: 0, bottom: 30 }}
     >
       <XAxis
+        domain={['dataMin - 2', 'dataMax + 2']}
         dataKey={'x'}
         name={name[0]}
         unit="baht"
@@ -14,6 +15,7 @@ const CorrelationChart = ({ data, name }) => (
         tick={{ transform: 'translate(0, 10)' }}
       />
       <YAxis
+        domain={['dataMin -2', 'dataMax + 2']}
         dataKey={'y'}
         name={name[1]}
         unit="baht"

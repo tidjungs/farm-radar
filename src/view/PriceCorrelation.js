@@ -40,7 +40,7 @@ class PriceCorrelation extends Component {
         </div>
         <div className="correlation-data-container">
           <div className="correlation-data">
-            <p>0.9</p>
+            <p>{ this.props.corrValue ? this.props.corrValue.toFixed(1) : '-' }</p>
           </div>
           <div className="correlation-data">
             <p>positive corelation</p>
