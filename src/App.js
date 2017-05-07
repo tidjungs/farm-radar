@@ -257,6 +257,7 @@ class App extends Component {
             <PropsRoute
               exact path="/farm-radar/info"
               component={PlantInfo}
+              productId={this.state.productData.filter(p => p.active)[0].id}
             />
           </div>
         </div>

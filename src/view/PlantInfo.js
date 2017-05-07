@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AreaChart from '../component/AreaChart';
-import { loadProvince } from '../request';
+import { loadProvince, loadInfoData } from '../request';
 import './PlantInfo.css';
 
 class FarmInfo extends Component {
@@ -8,13 +8,10 @@ class FarmInfo extends Component {
     super();
     this.state = {
       data: [
-        { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
-        { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
-        { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
-        { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
-        { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
-        { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
-        { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
+        { year: '2013', plantarea: 4000, pv: 2400, amt: 2400, harvestarea: 3000, goods: 2000 },
+        { year: '2014', plantarea: 3000, pv: 1398, amt: 2210, harvestarea: 2000, goods: 3000 },
+        { year: '2015', plantarea: 2000, pv: 9800, amt: 2290, harvestarea: 1000, goods: 3000 },
+        { year: '2016', plantarea: 2780, pv: 3908, amt: 2000, harvestarea: 2000, goods: 2000 },
       ],
       info: [
         { id: 0, name: 'Plant Area', active: true, value: 'plantarea' },
@@ -40,10 +37,18 @@ class FarmInfo extends Component {
     });
   }
 
-  selectProvince(e) {
+  async selectProvince(e) {
+    const id = e.target.value;
     this.setState({
-      provinceTargetId: e.target.value,
+      provinceTargetId: id,
     });
+    if (e.target.value !== 0) {
+      // const data = await loadInfoData(id, this.props.productId);
+      const data = await loadInfoData(19853, 11331);
+      this.setState({
+        data,
+      });
+    }
   }
 
   render() {
@@ -78,7 +83,10 @@ class FarmInfo extends Component {
           </div>
         </div>
         <div className="chart-container">
-          <AreaChart data={this.state.data} />
+          <AreaChart
+            data={this.state.data}
+            active={this.state.info.filter(i => i.active)[0].value}
+          />
         </div>
       </div>
     );
