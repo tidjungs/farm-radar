@@ -16,7 +16,7 @@ import PriceCorrelation from './view/PriceCorrelation';
 import PlantInfo from './view/PlantInfo';
 import Search from './view/Search';
 import './App.css';
-import mapColorWithFarm from './utils/color';
+import { mapColorWithFarm } from './utils/color';
 import getName from './utils/name';
 import { loadCorrData, loadPriceData, loadProvince, loadInfoData } from './request';
 // import test from './utils/loading';

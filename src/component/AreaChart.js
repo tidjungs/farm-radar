@@ -1,5 +1,7 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { getInfoColor } from '../utils/color';
+
 
 const Chart = ({ data, active }) => (
   <ResponsiveContainer width="90%" height={400}>
@@ -23,7 +25,12 @@ const Chart = ({ data, active }) => (
           color: '#fff',
         }}
       />
-      <Area type="monotone" dataKey={active} stroke="#8884d8" fill="#8884d8" />
+      <Area
+        type="monotone"
+        dataKey={active}
+        stroke={getInfoColor(active)}
+        fill={getInfoColor(active)}
+      />
     </AreaChart>
   </ResponsiveContainer>
 );

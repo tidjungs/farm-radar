@@ -55,6 +55,7 @@
     "react-dom": "^15.5.4",
     "react-input-autosize": "1.1.0",
     "react-router-dom": "^4.1.1",
+    "react-select": "^1.0.0-rc.3",
     "recharts": "^0.22.4"
   },
   "scripts": {
