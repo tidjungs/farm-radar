@@ -21,6 +21,7 @@ class FarmInfo extends Component {
     });
   }
   render() {
+    const message = (this.props.targetId === '0') ? 'กรุณาเลือกจังหวัด' : 'ไม่พบข้อมูล';
     return (
       <div className="content-container">
         <div className="info-topbar">
@@ -60,7 +61,7 @@ class FarmInfo extends Component {
               />
             </div>
           :
-            <div style={{ color: 'white' }}>ไม่พบข้อมูล</div>
+            <div className="message-info"><h1>{ message }</h1></div>
         }
       </div>
     );
