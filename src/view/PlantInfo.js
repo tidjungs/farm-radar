@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 import AreaChart from '../component/AreaChart';
 import './PlantInfo.css';
 
@@ -22,16 +24,29 @@ class FarmInfo extends Component {
   }
   render() {
     const message = (this.props.targetId === '0') ? 'กรุณาเลือกจังหวัด' : 'ไม่พบข้อมูล';
+    const selectProvince = this.props.province.filter(p => p.id === this.props.targetId);
     return (
       <div className="content-container">
         <div className="info-topbar">
-          <select className="province" onChange={e => this.props.selectProvince(e)}>
+          <Select
+            className="province"
+            value={selectProvince.lenght > 0 && selectProvince[0].name}
+            name="form-field-name"
+            options={this.props.province.map(p => ({ val: p.id, label: p.name }))}
+            onChange={val => this.props.selectProvince(val)}
+          />
+          {/* <select className="province" onChange={e => this.props.selectProvince(e)}>
             {
               this.props.province.map(pv =>
-                <option key={pv.id} value={pv.id}>{ pv.name }</option>,
+                <option
+                  key={pv.id}
+                  value={pv.id}
+                >
+                  { pv.name }
+                </option>,
               )
             }
-          </select>
+          </select>*/}
           <div className="info-select">
             {
               this.state.info.map(i =>

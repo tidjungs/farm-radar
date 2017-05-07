@@ -38,6 +38,10 @@
 
 .province {
   margin-left: 10%;
+  width: 200px;
+}
+.province > option {
+  font-family: 'Kanit', sans-serif,
 }
 
 .message-info {

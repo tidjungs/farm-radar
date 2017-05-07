@@ -58,7 +58,8 @@ class App extends Component {
       data: [],
       infoData: [],
       provinceTargetId: '0',
-      province: [{ id: 0, name: 'select province' }],
+      provinceName: '',
+      province: [],
       duration: [
         { id: 1, name: '1W', active: true, key: 'week' },
         { id: 2, name: '1M', active: false, key: 'month' },
@@ -102,11 +103,15 @@ class App extends Component {
     this.loadData(854569);
     this.loadProvince();
   }
-  async selectProvince(e) {
-    const id = e.target.value;
+  async selectProvince(val) {
+    if (val === null) {
+      return;
+    }
+    const id = val.val;
     this.setState({
       loading: true,
       provinceTargetId: id,
+      provinceName: val.label,
     });
     if (id !== 0) {
       const data = await loadInfoData(id, this.state.productData.filter(p => p.active)[0].id);
@@ -284,7 +289,8 @@ class App extends Component {
               data={this.state.infoData}
               targetId={this.state.provinceTargetId}
               province={this.state.province}
-              selectProvince={e => this.selectProvince(e)}
+              selectProvince={val => this.selectProvince(val)}
+              provinceName={this.state.provinceName}
             />
           </div>
         </div>

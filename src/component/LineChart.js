@@ -20,6 +20,7 @@ const Chart = ({ data, farm }) => (
       />
       <Tooltip
         wrapperStyle={{
+          fontFamily: "'Kanit', sans-serif",
           background: '#262833',
           border: 0,
           borderRadius: '10px',

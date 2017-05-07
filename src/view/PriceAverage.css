@@ -62,6 +62,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: 'Kanit', sans-serif;
 }
 
 .moving-avg-card-inside > .bottom {
