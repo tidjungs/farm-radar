@@ -25,13 +25,14 @@
 
 .content-container {
   width: 75%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   /*background: #484856;*/
   background: #354459;
 }
 
-.correlation-chart-container {
+.chart-container {
   display: flex;
   justify-content: center;
 }

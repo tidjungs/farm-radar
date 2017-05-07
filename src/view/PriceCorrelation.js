@@ -33,7 +33,7 @@ class PriceCorrelation extends Component {
           duration={this.state.duration}
           changeDuration={index => this.changeDuration(index)}
         />
-        <div className="correlation-chart-container">
+        <div className="chart-container">
           <CorrelationChart
             data={filterData(this.props.data, key)}
             name={this.props.name}

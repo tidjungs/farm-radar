@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AreaChart from '../component/AreaChart';
 import { loadProvince } from '../request';
-
+import './PlantInfo.css';
 
 class FarmInfo extends Component {
   constructor() {
@@ -17,10 +17,11 @@ class FarmInfo extends Component {
         { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
       ],
       info: [
-        { id: 0, name: 'plantarea', active: true },
-        { id: 1, name: 'harvestarea', active: true },
-        { id: 2, name: 'goods', active: true },
+        { id: 0, name: 'Plant Area', active: true, value: 'plantarea' },
+        { id: 1, name: 'Harvest Area', active: false, value: 'harvestarea' },
+        { id: 2, name: 'Goods', active: false, value: 'goods' },
       ],
+      provinceTargetId: '0',
       province: [{ id: 0, name: 'select province' }],
     };
   }
@@ -31,36 +32,54 @@ class FarmInfo extends Component {
       province: [...this.state.province, ...province],
     });
   }
+  changeInfo(id) {
+    this.setState({
+      info: this.state.info.map(i =>
+        (i.id === id ? { ...i, active: true } : { ...i, active: false }),
+      ),
+    });
+  }
 
   selectProvince(e) {
-    console.log(e.target.value);
     this.setState({
-      test: 123,
+      provinceTargetId: e.target.value,
     });
   }
 
   render() {
     return (
-      <div>
-        <select onChange={e => this.selectProvince(e)}>
-          {
-            this.state.province.map(pv =>
-              <option key={pv.id} value={pv.id}>{ pv.name }</option>,
-            )
-          }
-        </select>
-        <div className="info-select">
-          {
-            this.state.info.map(i =>
-              <div key={i.id}>
-                <button>
-                  {i.name}
-                </button>
-              </div>,
-            )
-          }
+      <div className="content-container">
+        <div className="info-topbar">
+          <select className="province" onChange={e => this.selectProvince(e)}>
+            {
+              this.state.province.map(pv =>
+                <option key={pv.id} value={pv.id}>{ pv.name }</option>,
+              )
+            }
+          </select>
+          <div className="info-select">
+            {
+              this.state.info.map(i =>
+                <div key={i.id}>
+                  {
+                    i.active ?
+                      <button
+                        style={{ background: '#e0e0e0', color: '#354459' }}
+                        onClick={() => this.changeInfo(i.id)}
+                      >{i.name}</button> :
+                      <button
+                        style={{ background: '#354459', color: '#e0e0e0' }}
+                        onClick={() => this.changeInfo(i.id)}
+                      >{i.name}</button>
+                  }
+                </div>,
+              )
+            }
+          </div>
         </div>
-        <AreaChart data={this.state.data} />
+        <div className="chart-container">
+          <AreaChart data={this.state.data} />
+        </div>
       </div>
     );
   }
