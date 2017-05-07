@@ -18,7 +18,7 @@ import Search from './view/Search';
 import './App.css';
 import mapColorWithFarm from './utils/color';
 import getName from './utils/name';
-import { loadCorrData, loadPriceData } from './request';
+import { loadCorrData, loadPriceData, loadProvince, loadInfoData } from './request';
 // import test from './utils/loading';
 
 const renderMergedProps = (component, ...rest) => {
@@ -56,12 +56,14 @@ class App extends Component {
       corr: false,
       loading: false,
       data: [],
+      infoData: [],
+      provinceTargetId: '0',
+      province: [{ id: 0, name: 'select province' }],
       duration: [
         { id: 1, name: '1W', active: true, key: 'week' },
         { id: 2, name: '1M', active: false, key: 'month' },
         { id: 3, name: '6M', active: false, key: 'halfyear' },
         { id: 4, name: '1Y', active: false, key: 'year' },
-        // { id: 5, name: '5Y', active: false, key: '5year' },
       ],
       corrData: [],
       keyX: 'x',
@@ -98,7 +100,29 @@ class App extends Component {
   }
   componentWillMount() {
     this.loadData(854569);
+    this.loadProvince();
   }
+  async selectProvince(e) {
+    const id = e.target.value;
+    this.setState({
+      loading: true,
+      provinceTargetId: id,
+    });
+    if (id !== 0) {
+      const data = await loadInfoData(id, this.state.productData.filter(p => p.active)[0].id);
+      this.setState({
+        infoData: data,
+        loading: false,
+      });
+    }
+  }
+  async loadProvince() {
+    const province = await loadProvince();
+    this.setState({
+      province: [...this.state.province, ...province],
+    });
+  }
+
   async loadData(id) {
     this.setState({
       loading: true,
@@ -257,7 +281,10 @@ class App extends Component {
             <PropsRoute
               exact path="/farm-radar/info"
               component={PlantInfo}
-              productId={this.state.productData.filter(p => p.active)[0].id}
+              data={this.state.infoData}
+              targetId={this.state.provinceTargetId}
+              province={this.state.province}
+              selectProvince={e => this.selectProvince(e)}
             />
           </div>
         </div>

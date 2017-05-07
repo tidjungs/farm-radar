@@ -1,39 +1,18 @@
 import React, { Component } from 'react';
 import AreaChart from '../component/AreaChart';
-import { loadProvince, loadInfoData } from '../request';
 import './PlantInfo.css';
 
 class FarmInfo extends Component {
   constructor() {
     super();
     this.state = {
-      data: [
-        { year: '2013', plantarea: 4000, pv: 2400, amt: 2400, harvestarea: 3000, goods: 2000 },
-        { year: '2014', plantarea: 3000, pv: 1398, amt: 2210, harvestarea: 2000, goods: 3000 },
-        { year: '2015', plantarea: 2000, pv: 9800, amt: 2290, harvestarea: 1000, goods: 3000 },
-        { year: '2016', plantarea: 2780, pv: 3908, amt: 2000, harvestarea: 2000, goods: 2000 },
-      ],
       info: [
         { id: 0, name: 'Plant Area', active: true, value: 'plantarea' },
         { id: 1, name: 'Harvest Area', active: false, value: 'harvestarea' },
         { id: 2, name: 'Goods', active: false, value: 'goods' },
       ],
-      provinceTargetId: '0',
-      province: [{ id: 0, name: 'select province' }],
     };
   }
-
-  componentWillMount() {
-    this.loadProvince();
-  }
-
-  async loadProvince() {
-    const province = await loadProvince();
-    this.setState({
-      province: [...this.state.province, ...province],
-    });
-  }
-
   changeInfo(id) {
     this.setState({
       info: this.state.info.map(i =>
@@ -41,28 +20,13 @@ class FarmInfo extends Component {
       ),
     });
   }
-
-  async selectProvince(e) {
-    const id = e.target.value;
-    this.setState({
-      provinceTargetId: id,
-    });
-    if (id !== 0) {
-      const data = await loadInfoData(id, this.props.productId);
-      // const data = await loadInfoData(19853, 11331);
-      this.setState({
-        data,
-      });
-    }
-  }
-
   render() {
     return (
       <div className="content-container">
         <div className="info-topbar">
-          <select className="province" onChange={e => this.selectProvince(e)}>
+          <select className="province" onChange={e => this.props.selectProvince(e)}>
             {
-              this.state.province.map(pv =>
+              this.props.province.map(pv =>
                 <option key={pv.id} value={pv.id}>{ pv.name }</option>,
               )
             }
@@ -88,10 +52,10 @@ class FarmInfo extends Component {
           </div>
         </div>
         {
-          (this.state.data.length > 0) ?
+          (this.props.data.length > 0) ?
             <div className="chart-container">
               <AreaChart
-                data={this.state.data}
+                data={this.props.data}
                 active={this.state.info.filter(i => i.active)[0].value}
               />
             </div>
