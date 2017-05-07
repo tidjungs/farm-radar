@@ -10,7 +10,7 @@ export const getInfoColor = (type) => {
   if (type === 'plantarea') {
     return '#16a085';
   } else if (type === 'harvestarea') {
-    return '#f39c12';
+    return '#DFBA50';
   }
   return '#2980b9';
 };
