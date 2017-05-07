@@ -23,12 +23,17 @@ class FarmInfo extends Component {
     };
   }
 
-  async componentWillMount() {
+  componentWillMount() {
+    this.loadProvince();
+  }
+
+  async loadProvince() {
     const province = await loadProvince();
     this.setState({
       province: [...this.state.province, ...province],
     });
   }
+
   changeInfo(id) {
     this.setState({
       info: this.state.info.map(i =>
@@ -42,9 +47,9 @@ class FarmInfo extends Component {
     this.setState({
       provinceTargetId: id,
     });
-    if (e.target.value !== 0) {
-      // const data = await loadInfoData(id, this.props.productId);
-      const data = await loadInfoData(19853, 11331);
+    if (id !== 0) {
+      const data = await loadInfoData(id, this.props.productId);
+      // const data = await loadInfoData(19853, 11331);
       this.setState({
         data,
       });
