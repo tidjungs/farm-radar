@@ -14,7 +14,7 @@ const MovingAvgCard = ({ name, mAvg, color, activeFarm, id, active }) => (
         </div>
       </div>
       <div className="bottom">
-        <div className="m-avg">{ mAvg ? mAvg.toFixed(1) : 0.0 }</div>
+        <div className="m-avg">{ mAvg }</div>
       </div>
     </div>
   </div>

@@ -11,3 +11,15 @@ export async function loadPriceData(id) {
   const res = await response.json();
   return res;
 }
+
+export async function loadProvince() {
+  const response = await fetch('http://shrouded-tundra-34049.herokuapp.com/province');
+  const res = response.json();
+  return res;
+}
+
+export async function loadInfoData(provinceId, productId) {
+  const response = await fetch(`http://shrouded-tundra-34049.herokuapp.com/crop/${provinceId}/${productId}`);
+  const res = response.json();
+  return res;
+}
