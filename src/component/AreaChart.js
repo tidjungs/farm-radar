@@ -14,7 +14,6 @@ const Chart = ({ data, active }) => (
       />
       <YAxis
         stroke="#e0e0e0"
-        tick={{ transform: 'translate(-10, 0)' }}
       />
       <Tooltip
         wrapperStyle={{
