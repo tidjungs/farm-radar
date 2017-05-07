@@ -87,12 +87,17 @@ class FarmInfo extends Component {
             }
           </div>
         </div>
-        <div className="chart-container">
-          <AreaChart
-            data={this.state.data}
-            active={this.state.info.filter(i => i.active)[0].value}
-          />
-        </div>
+        {
+          (this.state.data.length > 0) ?
+            <div className="chart-container">
+              <AreaChart
+                data={this.state.data}
+                active={this.state.info.filter(i => i.active)[0].value}
+              />
+            </div>
+          :
+            <div style={{ color: 'white' }}>ไม่พบข้อมูล</div>
+        }
       </div>
     );
   }
