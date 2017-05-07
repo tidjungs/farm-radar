@@ -16,6 +16,11 @@ class FarmInfo extends Component {
         { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
         { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
       ],
+      info: [
+        { id: 0, name: 'plantarea', active: true },
+        { id: 1, name: 'harvestarea', active: true },
+        { id: 2, name: 'goods', active: true },
+      ],
       province: [{ id: 0, name: 'select province' }],
     };
   }
@@ -44,6 +49,17 @@ class FarmInfo extends Component {
             )
           }
         </select>
+        <div className="info-select">
+          {
+            this.state.info.map(i =>
+              <div key={i.id}>
+                <button>
+                  {i.name}
+                </button>
+              </div>,
+            )
+          }
+        </div>
         <AreaChart data={this.state.data} />
       </div>
     );
