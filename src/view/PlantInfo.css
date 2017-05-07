@@ -48,3 +48,11 @@
   color: #e0e0e0;
   font-family: 'Kanit', sans-serif;
 }
+
+.province-text {
+  margin: 0;
+  margin-top: 5px; 
+  font-size: 20px;
+  color: #e0e0e0;
+  font-family: 'Kanit', sans-serif;
+}

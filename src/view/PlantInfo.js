@@ -35,6 +35,7 @@ class FarmInfo extends Component {
             options={this.props.province.map(p => ({ val: p.id, label: p.name }))}
             onChange={val => this.props.selectProvince(val)}
           />
+          <p className="province-text">{this.props.provinceName}</p>
           {/* <select className="province" onChange={e => this.props.selectProvince(e)}>
             {
               this.props.province.map(pv =>
