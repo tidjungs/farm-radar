@@ -200,7 +200,7 @@ class App extends Component {
             <p>{ this.state.name }</p>
             <Link onClick={() => this.disCorr()} to="/farm-radar"><p>Price</p></Link>
             <Link onClick={() => this.corr()} to="/farm-radar/corr"><p>Corr</p></Link>
-            <Link onClick={() => this.disCorr()} to="/info"><p>Info</p></Link>
+            <Link onClick={() => this.disCorr()} to="/farm-radar/info"><p>Info</p></Link>
           </div>
           <div className="App-container">
             {
@@ -255,7 +255,7 @@ class App extends Component {
               name={getName(this.state.productCorr, this.state.selectedCorr)}
             />
             <PropsRoute
-              exact path="/info"
+              exact path="/farm-radar/info"
               component={PlantInfo}
             />
           </div>

@@ -1,19 +1,50 @@
 import React, { Component } from 'react';
 import AreaChart from '../component/AreaChart';
+import { loadProvince } from '../request';
+
 
 class FarmInfo extends Component {
   constructor() {
     super();
     this.state = {
-      name: 'farm',
+      data: [
+        { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
+        { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
+        { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
+        { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
+        { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
+        { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
+        { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
+      ],
+      province: [{ id: 0, name: 'select province' }],
     };
+  }
+
+  async componentWillMount() {
+    const province = await loadProvince();
+    this.setState({
+      province: [...this.state.province, ...province],
+    });
+  }
+
+  selectProvince(e) {
+    console.log(e.target.value);
+    this.setState({
+      test: 123,
+    });
   }
 
   render() {
     return (
       <div>
-        { this.state.name }
-        <AreaChart />
+        <select onChange={e => this.selectProvince(e)}>
+          {
+            this.state.province.map(pv =>
+              <option key={pv.id} value={pv.id}>{ pv.name }</option>,
+            )
+          }
+        </select>
+        <AreaChart data={this.state.data} />
       </div>
     );
   }
