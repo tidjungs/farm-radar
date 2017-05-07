@@ -39,3 +39,8 @@
 .province {
   margin-left: 10%;
 }
+
+.message-info {
+  color: #e0e0e0;
+  font-family: 'Kanit', sans-serif;
+}
